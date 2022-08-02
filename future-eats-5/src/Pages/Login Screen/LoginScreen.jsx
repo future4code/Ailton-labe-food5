@@ -18,19 +18,17 @@ export const LoginScreen = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        `https://us-central1-missao-newton.cloudfunctions.net/futureEatsB/login
-`,
+        `${BaseUrl}login`,
         form
       );
       console.log(response);
       console.log("foi");
       GoTo(navigate, "/home");
+      localStorage.setItem("token", response.data.token);
     } catch (error) {
       window.alert(error.message);
     }
   };
-
-  // console.log(BaseUrl)
 
   return (
     <Container>
@@ -45,7 +43,7 @@ export const LoginScreen = () => {
           onChange={onChange}
           required
           placeholder="E-mail"
-          // pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+          pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
         />
         <Input
           name="password"
@@ -53,7 +51,7 @@ export const LoginScreen = () => {
           onChange={onChange}
           required
           placeholder="Senha"
-          // pattern="^.{6,}$"
+          pattern="^.{6,}$"
           type={"password"}
         />
         <Button>Entrar</Button>
