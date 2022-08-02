@@ -1,7 +1,7 @@
 import React from "react";
 import { useRequestData } from "../../Hooks/useRequestData";
 import { BaseUrl } from "../../Constants/BaseUrl";
-import lupaicon from "../../assets/img/lupa.png";
+import lupaicon from "../../Assets/img/lupa.png";
 import {
   ContainerLupe,
   ContainerRestaurants,
