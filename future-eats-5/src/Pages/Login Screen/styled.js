@@ -27,6 +27,7 @@ export const Title = styled.p`
   text-align: center;
   color: var(--black);
 `;
+
 export const Form = styled.form`
   width: 100%;
   padding: 20px 16px;
