@@ -12,23 +12,30 @@ import {
 } from "./styled";
 
 export const HomeScreen = () => {
-  const data = useRequestData(`${BaseUrl}restaurants`);
+  const addressToken = localStorage.getItem("addressToken");
+  const data = useRequestData(`${BaseUrl}restaurants`, addressToken);
   const [array, setArray] = useState([]);
   const [searching, setSearching] = useState(false);
   const { form, onChange, cleanFields } = useForm({
     search: "",
   });
   //  console.log(data)
-
+  const unSearch = () => {
+    setSearching(false);
+  };
   const onClickCategory = (id) => {
     setSearching(true);
     const filteredRestaurants = data.filter((filteredCategory) => {
       return filteredCategory.category === id;
     });
-    setArray(filteredRestaurants)
+    setArray(filteredRestaurants);
   };
 
-  const categoryRestaurants = array.map((restaurant) => {
+  const categoryRestaurants = array.filter((filteredRestaurant) => {
+    return filteredRestaurant.name
+      .toLowerCase()
+      .includes(form.search.toLowerCase());
+  }).map((restaurant) => {
     return (
       <ContainerRestaurant key={restaurant.id}>
         <img src={restaurant.logoUrl} alt="foto logo" />
@@ -78,7 +85,7 @@ export const HomeScreen = () => {
         </label>
       </ContainerLupe>
       <ContainerCategory>
-        <p>Todos</p>
+        <p onClick={unSearch}>Todos</p>
         {data?.map(({ category }) => {
           return <p onClick={() => onClickCategory(category)}>{category}</p>;
         })}
