@@ -1,10 +1,9 @@
 import React from "react";
 import axios from "axios";
+import Logo from "../../Assets/logofutureeats.png";
 import { useNavigate } from "react-router-dom";
 import { Container, Title, DivLogo, LogoStyle, Form, Text, A } from "./styled";
-import Logo from "../../Assets/logofutureeats.png";
-import { Separator } from "../../Components/Separator";
-import { Input } from "../../Components/Input";
+import { Input } from "../../Components/Input/Input";
 import { Button } from "../../Components/Button";
 import { GoTo } from "../../Functions/GoTo";
 import { useForm } from "../../Hooks/useForm";
@@ -21,8 +20,6 @@ export const LoginScreen = () => {
         `${BaseUrl}login`,
         form
       );
-      console.log(response);
-      console.log("foi");
       GoTo(navigate, "/home");
       localStorage.setItem("token", response.data.token);
     } catch (error) {
@@ -38,21 +35,21 @@ export const LoginScreen = () => {
       <Title>Entrar</Title>
       <Form onSubmit={login}>
         <Input
+          required
           name="email"
           value={form.email}
           onChange={onChange}
-          required
-          placeholder="E-mail"
+          label={"E-mail"}
           pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
         />
         <Input
+          required
           name="password"
           value={form.password}
           onChange={onChange}
-          required
-          placeholder="Senha"
           pattern="^.{6,}$"
           type={"password"}
+          label={"Senha"}
         />
         <Button>Entrar</Button>
       </Form>

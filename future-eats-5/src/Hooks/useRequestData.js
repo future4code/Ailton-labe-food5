@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-export const useRequestData = (url) => {
-    const [data, setData] = useState([])
-
-    useEffect(() => {
-        axios.get(url, {
-            headers: {
-                auth: localStorage.getItem("token")
-            }
-        })
+export const useRequestData = (url, token) => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    if (token !== null) {
+      axios
+        .get(url, {headers: {auth: token}})
         .then((res) => {
-            setData(res.data.restaurants)
+          setData(res.data.restaurants);
         })
         .catch((err) => {
-            console.log(err)
-            alert("Erro na Requisição")
-        })
+          console.log(err);
+          alert("Erro na Requisição");
+        });
+    }
+  }, [url]);
 
-    }, [url])
-
-  return data
-}
+  return data;
+};

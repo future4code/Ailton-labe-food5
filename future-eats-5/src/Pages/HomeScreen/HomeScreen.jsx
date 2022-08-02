@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRequestData } from "../../Hooks/useRequestData";
 import { BaseUrl } from "../../Constants/BaseUrl";
 import lupaicon from "../../Assets/img/lupa.png";
@@ -8,11 +8,13 @@ import {
   ContainerCategory,
   ContainerRestaurant,
 } from "./styled";
+import { useNavigate } from "react-router-dom";
+import { useProtectedPage } from "../../Hooks/useProtectedPage";
 
 export const HomeScreen = () => {
-  const data = useRequestData(`${BaseUrl}restaurants`);
-  console.log(data);
-
+  useProtectedPage()
+  const token = localStorage.getItem("addressToken");
+  const data = useRequestData(`${BaseUrl}restaurants`, token);
   const restaurants = data.map((restaurant) => {
     return (
       <ContainerRestaurant key={restaurant.id}>
@@ -27,7 +29,6 @@ export const HomeScreen = () => {
       </ContainerRestaurant>
     );
   });
-
   return (
     <div>
       <ContainerLupe>
@@ -37,8 +38,8 @@ export const HomeScreen = () => {
         </label>
       </ContainerLupe>
       <ContainerCategory>
-        {data?.map(({category}) => {
-          return <p>{category}</p>
+        {data?.map(({ category }) => {
+          return <p>{category}</p>;
         })}
       </ContainerCategory>
       <ContainerRestaurants>{restaurants}</ContainerRestaurants>
