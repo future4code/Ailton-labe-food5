@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const useRequestData = (url, token) => {
   const [data, setData] = useState([]);
-  useEffect(() => {
+  const getRestaurant = (() => {
     if (token !== null) {
       axios
         .get(url, {headers: {auth: token}})
@@ -15,7 +15,9 @@ export const useRequestData = (url, token) => {
           alert("Erro na Requisição");
         });
     }
-  }, [url]);
+  });
 
-  return data;
+  return {getRestaurant, data};
 };
+
+

@@ -13,3 +13,10 @@ export const ArrowImage = styled.img`
 width: 23px;
 height: 24px;
 `
+
+export const Title = styled.p`
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+`
