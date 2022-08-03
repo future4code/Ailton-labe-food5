@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ContainerLupe = styled.div `
     width: 360px;
-    margin: 12px auto;
+    margin: 8px auto;
     display: flex;
     justify-content: center;
     label {
@@ -71,3 +71,12 @@ export const ContainerRestaurant = styled.div `
         
     }
 `;
+
+export const ContainerRedirect = styled.div`
+display: flex;
+flex-direction: column;
+text-align: center;
+gap: 12px;
+width: 328px;
+margin: 164px auto;
+`

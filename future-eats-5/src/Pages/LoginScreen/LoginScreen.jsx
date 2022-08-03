@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import Logo from "../../Assets/logofutureeats.png";
 import { useNavigate } from "react-router-dom";
@@ -12,20 +12,24 @@ import { BaseUrl } from "../../Constants/BaseUrl";
 export const LoginScreen = () => {
   const { form, onChange, cleanFields } = useForm({ email: "", password: "" });
   const navigate = useNavigate();
+  const addressToken = localStorage.getItem("addressToken");
 
   const login = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        `${BaseUrl}login`,
-        form
-      );
+      const response = await axios.post(`${BaseUrl}login`, form);
       GoTo(navigate, "/home");
       localStorage.setItem("token", response.data.token);
     } catch (error) {
       window.alert(error.message);
     }
   };
+  
+  useEffect(() => {
+    if (addressToken !== null) {
+      GoTo(navigate, "/home");
+    }
+  }, []);
 
   return (
     <Container>

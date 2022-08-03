@@ -6,7 +6,7 @@ height: 44px;
 display: flex;
 flex-wrap: wrap;
 padding: 10px 16px;
-border-bottom: 0.5px solid rgba(0, 0, 0, 0.25);
+box-shadow: 0 0.5px 0 0 rgba(0,0,0,0.25);
 position: relative;
 `
 

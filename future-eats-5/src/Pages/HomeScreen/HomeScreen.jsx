@@ -9,13 +9,20 @@ import {
   ContainerRestaurants,
   ContainerCategory,
   ContainerRestaurant,
+  ContainerRedirect,
 } from "./styled";
 import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../../Components/Button";
+import { Header } from "../../Components/Header/Header";
 
 export const HomeScreen = () => {
+  const token = localStorage.getItem("token");
   const addressToken = localStorage.getItem("addressToken");
-  const {data, getRestaurant} = useRequestData(`${BaseUrl}restaurants`, addressToken);
+  const { data, getRestaurant } = useRequestData(
+    `${BaseUrl}restaurants`,
+    addressToken
+  );
   const [array, setArray] = useState([]);
   const [searching, setSearching] = useState(false);
   const { form, onChange, cleanFields } = useForm({
@@ -34,26 +41,7 @@ export const HomeScreen = () => {
     setArray(filteredRestaurants);
   };
 
-  const categoryRestaurants = array.filter((filteredRestaurant) => {
-    return filteredRestaurant.name
-      .toLowerCase()
-      .includes(form.search.toLowerCase());
-  }).map((restaurant) => {
-    return (
-      <ContainerRestaurant key={restaurant.id}>
-        <img src={restaurant.logoUrl} alt="foto logo" />
-        <div>
-          <p id="nameRes">{restaurant.name}</p>
-          <span>
-            <p>{`${restaurant.deliveryTime} min`}</p>
-            <p>{`Frete R$${restaurant.shipping}`}</p>
-          </span>
-        </div>
-      </ContainerRestaurant>
-    );
-  });
-
-  const restaurants = data
+  const categoryRestaurants = array
     .filter((filteredRestaurant) => {
       return filteredRestaurant.name
         .toLowerCase()
@@ -61,7 +49,7 @@ export const HomeScreen = () => {
     })
     .map((restaurant) => {
       return (
-        <ContainerRestaurant key={restaurant.id} onClick={()=>{GoTo(navigate, `/restaurant/${restaurant.id}`)}}>
+        <ContainerRestaurant key={restaurant.id}>
           <img src={restaurant.logoUrl} alt="foto logo" />
           <div>
             <p id="nameRes">{restaurant.name}</p>
@@ -74,12 +62,39 @@ export const HomeScreen = () => {
       );
     });
 
-    useEffect( () => {
-      getRestaurant()
-    },[])
+  const restaurants = data
+    .filter((filteredRestaurant) => {
+      return filteredRestaurant.name
+        .toLowerCase()
+        .includes(form.search.toLowerCase());
+    })
+    .map((restaurant) => {
+      return (
+        <ContainerRestaurant
+          key={restaurant.id}
+          onClick={() => {
+            GoTo(navigate, `/restaurant/${restaurant.id}`);
+          }}
+        >
+          <img src={restaurant.logoUrl} alt="foto logo" />
+          <div>
+            <p id="nameRes">{restaurant.name}</p>
+            <span>
+              <p>{`${restaurant.deliveryTime} min`}</p>
+              <p>{`Frete R$${restaurant.shipping}`}</p>
+            </span>
+          </div>
+        </ContainerRestaurant>
+      );
+    });
+
+  useEffect(() => {
+    getRestaurant();
+  }, []);
 
   return (
     <div>
+      <Header text={"FutureEats"}/>
       <ContainerLupe>
         <label>
           <img src={lupaicon} />
@@ -91,16 +106,26 @@ export const HomeScreen = () => {
           />
         </label>
       </ContainerLupe>
-      <ContainerCategory>
-        <p onClick={unSearch}>Todos</p>
-        {data?.map(({ category }) => {
-          return <p onClick={() => onClickCategory(category)}>{category}</p>;
-        })}
-      </ContainerCategory>
+      {addressToken && (
+        <ContainerCategory>
+          <p onClick={unSearch}>Todos</p>
+          {data?.map(({ category }) => {
+            return <p onClick={() => onClickCategory(category)}>{category}</p>;
+          })}
+        </ContainerCategory>
+      )}
       {searching && (
         <ContainerRestaurants>{categoryRestaurants}</ContainerRestaurants>
       )}
       {searching || <ContainerRestaurants>{restaurants}</ContainerRestaurants>}
+      {addressToken || (
+        <ContainerRedirect>
+          <span>
+            Cadastre seu endereço para descobrir restaurantes perto de você
+          </span>
+          <Button onClick={()=>GoTo(navigate, "/address")}>Cadastrar endereço</Button>
+        </ContainerRedirect>
+      )}
     </div>
   );
 };
