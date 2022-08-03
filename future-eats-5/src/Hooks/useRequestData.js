@@ -9,6 +9,7 @@ export const useRequestData = (url, token) => {
         .get(url, {headers: {auth: token}})
         .then((res) => {
           setData(res.data.restaurants);
+          console.log(res.data)
         })
         .catch((err) => {
           console.log(err);

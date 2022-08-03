@@ -10,6 +10,8 @@ import {
   ContainerCategory,
   ContainerRestaurant,
 } from "./styled";
+import { GoTo } from "../../Functions/GoTo";
+import { useNavigate } from "react-router-dom";
 
 export const HomeScreen = () => {
   const addressToken = localStorage.getItem("addressToken");
@@ -19,6 +21,7 @@ export const HomeScreen = () => {
   const { form, onChange, cleanFields } = useForm({
     search: "",
   });
+  const navigate = useNavigate();
   //  console.log(data)
   const unSearch = () => {
     setSearching(false);
@@ -58,7 +61,7 @@ export const HomeScreen = () => {
     })
     .map((restaurant) => {
       return (
-        <ContainerRestaurant key={restaurant.id}>
+        <ContainerRestaurant key={restaurant.id} onClick={()=>{GoTo(navigate, `/restaurant/${restaurant.id}`)}}>
           <img src={restaurant.logoUrl} alt="foto logo" />
           <div>
             <p id="nameRes">{restaurant.name}</p>
