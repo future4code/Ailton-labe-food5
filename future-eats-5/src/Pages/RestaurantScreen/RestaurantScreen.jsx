@@ -32,9 +32,8 @@ export const RestaurantScreen = () => {
 
   const mainCourse = detail?.products?.filter((i)=>{
       return i.category !== "Acompanhamento" && i.category !== "Bebida" 
-  })/*.map((i)=>{
-    return i.name
-  })*/
+  })
+  
   const drink = detail?.products?.filter((i)=>{
     return  i.category === "Bebida" 
 })

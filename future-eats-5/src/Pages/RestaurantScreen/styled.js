@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const RestaurantCard = styled.div`
     width: 360px;
     height: 843px;
-    margin-top: 3%;
+    margin: 3% auto;
 `
 export const RestaurantContainer = styled.div`
     margin-left: 17px;
