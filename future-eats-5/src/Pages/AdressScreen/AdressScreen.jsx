@@ -1,5 +1,4 @@
-import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../../Components/Button";
 import { Header } from "../../Components/Header/Header";
 import { Input } from "../../Components/Input/Input";
@@ -8,13 +7,14 @@ import { useForm } from "../../Hooks/useForm";
 import { useProtectedPage } from "../../Hooks/useProtectedPage";
 import { Container, Text } from "./styled";
 import { BaseUrl } from "../../Constants/BaseUrl";
-import { GoTo } from "../../Functions/GoTo";
-import { useNavigate } from "react-router-dom";
+import { useAddress } from "../../Hooks/useAddress";
 
 export const AdressScreen = () => {
   useProtectedPage();
-  const navigate = useNavigate();
-  const { form, onChange, cleanFields } = useForm({
+  const token = localStorage.getItem("token")
+  const addressToken = localStorage.getItem("addressToken")
+  const {addAddress, getAddress} = useAddress()
+  const { form, setForm, onChange, cleanFields } = useForm({
     street: "",
     number: "",
     neighbourhood: "",
@@ -22,25 +22,16 @@ export const AdressScreen = () => {
     state: "",
     complement: "",
   });
-
-  const addAddress = async (event) => {
-    event.preventDefault();
-    const token = localStorage.getItem("token");
-    try {
-      const response = await axios.put(
-        `${BaseUrl}address`, form, { headers: { auth: token } });
-      localStorage.setItem("addressToken", response.data.token);
-      GoTo(navigate, "/home");
-    } catch (error) {
-      window.alert(error.message);
+  useState(()=>{
+    if (addressToken !== null) {
+      getAddress(`${BaseUrl}profile/address`, addressToken, setForm)
     }
-  };
+  },[])
 
   return (
     <Container>
-      <Header />
-      <Text>Meu endereço</Text>
-      <Form onSubmit={addAddress}>
+      <Header arrow={true} text={"Endereço"}/>
+      <Form onSubmit={(e)=>addAddress(`${BaseUrl}address`, form, token, e)}>
         <Input
           required
           name="street"
