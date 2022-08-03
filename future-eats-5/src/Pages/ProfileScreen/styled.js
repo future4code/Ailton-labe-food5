@@ -56,11 +56,15 @@ height: 1px;
 background-color: black;
 `
 export const DivHistoryCard = styled.div`
-width: 100%;
 display: flex;
 flex-direction: column;
+width: fit-content;
+margin: 0 auto;
 align-items: center;
-
+>img {
+  margin-top: 64px;
+  width: 64px;
+}
 `
 export const DivEmpty = styled.div`
   display: flex;

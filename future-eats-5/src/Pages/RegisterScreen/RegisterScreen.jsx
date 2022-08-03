@@ -23,15 +23,15 @@ export const RegisterScreen = () => {
     event.preventDefault();
     try {
       const response = await axios.post(`${BaseUrl}signup`, form);
-      GoTo(navigate, "/adress");
+      GoTo(navigate, "/address");
       localStorage.setItem("token", response.data.token);
     } catch (error) {
-      window.alert(error.data.message);
+      window.alert(error.reponse.data.message);
     }
-  };
+  }; 
   return (
     <Container>
-      <Header />
+      <Header arrow={true} />
       <DivLogo>
         <LogoStyle src={Logo} />
       </DivLogo>

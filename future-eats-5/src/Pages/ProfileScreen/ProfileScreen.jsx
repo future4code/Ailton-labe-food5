@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { useProtectedPage } from "../../Hooks/useProtectedPage";
 import { Header } from "../../Components/Header/Header";
-import { Container, DivEdits, DivProfile, DivAddress, ImgStyle, AddressTitleStyle, DivHistoryTitle, Line, CardHistory, DivHistoryCard } from "./styled";
+import {
+  Container,
+  DivEdits,
+  DivProfile,
+  DivAddress,
+  ImgStyle,
+  AddressTitleStyle,
+  DivHistoryTitle,
+  Line,
+  CardHistory,
+  DivHistoryCard,
+} from "./styled";
+import Pencil from "../../Assets/pencil.png";
+import EmptyHistory from "../../Assets/emptyhistory.png";
 import { useProfile } from "../../Hooks/useProfile";
 import { BaseUrl } from "../../Constants/BaseUrl";
-import Pencil from '../../Assets/pencil.png'
 import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
-import EmptyHistory from "../../Assets/emptyhistory.png"
 
 export const ProfileScreen = () => {
   useProtectedPage();
-  const token = localStorage.getItem("token")
-  const addressToken = localStorage.getItem("addressToken")
-  const { profileInfo, ordersHistory, getProfile, getOrdersHistory } = useProfile(
-    `${BaseUrl}profile`,
-    `${BaseUrl}profile/address`,
-    `${BaseUrl}orders/history`,
-    token,
-    addressToken
-  );
-  const navigate = useNavigate()
+  const token = localStorage.getItem("token");
+  const addressToken = localStorage.getItem("addressToken");
+  const { profileInfo, ordersHistory, getProfile, getOrdersHistory } =
+    useProfile();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getProfile()
-    getOrdersHistory()
-  },[])
-
-  console.log(profileInfo, ordersHistory)
+    getProfile(`${BaseUrl}profile`, token);
+    getOrdersHistory(`${BaseUrl}orders/history`, addressToken);
+  }, []);
   return (
     <Container>
-      <Header type={"profile"} />
+      <Header text={"Meu Perfil"} arrow={false} />
       <DivEdits>
         <DivProfile>
           <ImgStyle
@@ -42,7 +46,7 @@ export const ProfileScreen = () => {
           <p>{profileInfo?.user?.cpf}</p>
         </DivProfile>
         <DivAddress>
-          <ImgStyle onClick={() => GoTo(navigate, "/home")} src={Pencil} />
+          <ImgStyle onClick={() => GoTo(navigate, "/address")} src={Pencil} />
           <AddressTitleStyle>Endereço cadastrado</AddressTitleStyle>
           <p>{profileInfo?.user?.address}</p>
         </DivAddress>
@@ -53,10 +57,10 @@ export const ProfileScreen = () => {
       </DivHistoryTitle>
       <DivHistoryCard>
         {ordersHistory?.orders.length === 0 ? (
-          <div>
+          <>
             <img src={EmptyHistory} />
             <p>Sem pedidos anteriores!</p>
-          </div>
+          </>
         ) : (
           <CardHistory></CardHistory>
         )}

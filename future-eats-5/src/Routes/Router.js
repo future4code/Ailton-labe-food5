@@ -20,7 +20,7 @@ export const Router = () => {
         <Route path="/restaurant/:id" element={<RestaurantScreen />} />
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/edit-profile" element={<EditProfileScreen />} />
-        <Route path="/adress" element={<AdressScreen />} />
+        <Route path="/address" element={<AdressScreen />} />
         <Route path="/cart" element={<CartScreen />} />
       </Routes>
     </BrowserRouter>
