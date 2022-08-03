@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRequestData } from "../../Hooks/useRequestData";
 import { useForm } from "../../Hooks/useForm";
@@ -13,7 +13,7 @@ import {
 
 export const HomeScreen = () => {
   const addressToken = localStorage.getItem("addressToken");
-  const data = useRequestData(`${BaseUrl}restaurants`, addressToken);
+  const {data, getRestaurant} = useRequestData(`${BaseUrl}restaurants`, addressToken);
   const [array, setArray] = useState([]);
   const [searching, setSearching] = useState(false);
   const { form, onChange, cleanFields } = useForm({
@@ -70,6 +70,10 @@ export const HomeScreen = () => {
         </ContainerRestaurant>
       );
     });
+
+    useEffect( () => {
+      getRestaurant()
+    },[])
 
   return (
     <div>
