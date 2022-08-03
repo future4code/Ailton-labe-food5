@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const useProfile = () => {
+  const navigate = useNavigate()
   const [profileInfo, setProfileInfo] = useState({
     name: "",
     email: "",
@@ -45,9 +47,12 @@ export const useProfile = () => {
     }
   }
 
-  const updateProfile = async (url, body, token) => {
+  const updateProfile = async (url, body, token, event) => {
+    event.preventDefault()
     try {
       const response = await axios.put(url, body, {headers: {auth: token}})
+      window.alert("Cadastro atualizado!")
+      navigate(-1)
     } catch (error) {
       console.log(error)
       window.alert("Erro na requisição put")

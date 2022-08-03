@@ -12,6 +12,7 @@ import { BaseUrl } from "../../Constants/BaseUrl";
 export const EditProfileScreen = () => {
   useProtectedPage();
   const token = localStorage.getItem("token");
+  const addressToken = localStorage.getItem("addressToken")
   const { editProfile, profileInfo, updateProfile } = useProfile();
   const { form, setForm, onChange, cleanFields } = useForm({
     name: "",
@@ -26,7 +27,7 @@ export const EditProfileScreen = () => {
   return (
     <Container>
       <Header text={"Editar"} arrow={true} />
-      <Form onSubmit={()=>updateProfile(`${BaseUrl}profile`, form, token)}>
+      <Form onSubmit={(event)=>updateProfile(`${BaseUrl}profile`, form, addressToken, event)}>
         {profileInfo.user?.name !== undefined && (
           <>
             <Input
