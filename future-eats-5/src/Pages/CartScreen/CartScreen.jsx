@@ -4,6 +4,7 @@ import { Header } from '../../Components/Header/Header'
 import { Container, AddressTitleStyle, DivAddress, PStyle } from './styled'
 import { useProfile } from '../../Hooks/useProfile'
 import { BaseUrl } from '../../Constants/BaseUrl'
+import Footer from "../../Components/Footer/Footer"
 
 export const CartScreen = () => {
   useProtectedPage()
@@ -21,6 +22,7 @@ export const CartScreen = () => {
         <AddressTitleStyle>Endereço cadastrado</AddressTitleStyle>
         <PStyle>{profileInfo?.user?.address}</PStyle>
       </DivAddress>
+      <Footer />
     </Container>
   );
 }
