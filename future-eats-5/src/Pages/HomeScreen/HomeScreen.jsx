@@ -49,7 +49,8 @@ export const HomeScreen = () => {
     })
     .map((restaurant) => {
       return (
-        <ContainerRestaurant key={restaurant.id}>
+        <ContainerRestaurant 
+        onClick={() => {GoTo(navigate, `/restaurant/${restaurant.id}`)}} key={restaurant.id}>
           <img src={restaurant.logoUrl} alt="foto logo" />
           <div>
             <p id="nameRes">{restaurant.name}</p>
@@ -119,17 +120,14 @@ export const HomeScreen = () => {
       {searching && (
         <ContainerRestaurants>{categoryRestaurants}</ContainerRestaurants>
       )}
-      {!searching && <ContainerRestaurants>{restaurants}</ContainerRestaurants>}
-      {!addressToken && (
-        <ContainerRedirect>
-          <span>
-            Cadastre seu endereço para descobrir restaurantes perto de você
-          </span>
-          <Button onClick={() => GoTo(navigate, "/address")}>
-            Cadastrar endereço
-          </Button>
-        </ContainerRedirect>
-      )}
+        { !addressToken && (
+          <ContainerRedirect>
+            <span>
+              Cadastre seu endereço para descobrir restaurantes perto de você
+            </span>
+            <Button onClick={()=>GoTo(navigate, "/address")}>Cadastrar endereço</Button>
+          </ContainerRedirect>
+        )} 
     </div>
   );
 };
