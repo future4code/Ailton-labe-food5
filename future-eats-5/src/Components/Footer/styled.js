@@ -19,3 +19,7 @@ export const ContainerFooter = styled.footer `
         }
     }
 `;
+
+export const Icon = styled.img`
+width: 27px;
+`
