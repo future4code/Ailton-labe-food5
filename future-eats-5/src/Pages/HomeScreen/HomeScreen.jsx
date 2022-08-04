@@ -15,6 +15,7 @@ import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../Components/Button";
 import { Header } from "../../Components/Header/Header";
+import Footer from "../../Components/Footer/Footer"
 
 export const HomeScreen = () => {
   const token = localStorage.getItem("token");
@@ -129,6 +130,8 @@ export const HomeScreen = () => {
             <Button onClick={()=>GoTo(navigate, "/address")}>Cadastrar endereço</Button>
           </ContainerRedirect>
         )} 
+      <Footer />
+
     </div>
   );
 };
