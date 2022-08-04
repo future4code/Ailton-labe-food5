@@ -8,4 +8,8 @@ export const Button = styled.button`
   border-radius: 2px;
   background-color: #5cb646;
   border: none;
+  cursor: pointer;
+  :active, :hover {
+    background-color: #4f963e;
+  }
 `;

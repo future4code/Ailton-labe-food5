@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Logo from "../../Assets/logofutureeats.png";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +8,15 @@ import { Button } from "../../Components/Button";
 import { GoTo } from "../../Functions/GoTo";
 import { useForm } from "../../Hooks/useForm";
 import { BaseUrl } from "../../Constants/BaseUrl";
+import SplashScreen from "../../Components/SplashScreen/SplashScreen";
 
 export const LoginScreen = () => {
   const { form, onChange, cleanFields } = useForm({ email: "", password: "" });
   const navigate = useNavigate();
+  const token = localStorage.getItem("token")
   const addressToken = localStorage.getItem("addressToken");
+  const [splashScreenTime, setSplashScreenTime] = useState(1);
+  const [splashScreenShow, setSplashScreenShow] = useState(true);
 
   const login = async (event) => {
     event.preventDefault();
@@ -24,15 +28,22 @@ export const LoginScreen = () => {
       window.alert(error.message);
     }
   };
-  
+
   useEffect(() => {
-    if (addressToken !== null) {
+    if (token !== null) {
       GoTo(navigate, "/home");
     }
+    setTimeout(() => {
+      setSplashScreenTime(0);
+    }, 1000);
+    setTimeout(() => {
+      setSplashScreenShow(false);
+    }, 2000);
   }, []);
 
   return (
     <Container>
+      {splashScreenShow && <SplashScreen opacity={splashScreenTime} />}
       <DivLogo>
         <LogoStyle src={Logo} />
       </DivLogo>
