@@ -110,8 +110,8 @@ export const HomeScreen = () => {
       {addressToken && (
         <ContainerCategory>
           <p onClick={unSearch}>Todos</p>
-          {data?.map(({ category }) => {
-            return <p onClick={() => onClickCategory(category)}>{category}</p>;
+          {data?.map(({ category, index }) => {
+            return <p onClick={() => onClickCategory(category)} key={index}>{category}</p>;
           })}
         </ContainerCategory>
       )}
