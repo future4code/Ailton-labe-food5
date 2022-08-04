@@ -19,6 +19,7 @@ import { useProfile } from "../../Hooks/useProfile";
 import { BaseUrl } from "../../Constants/BaseUrl";
 import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../Components/Footer/Footer"
 
 export const ProfileScreen = () => {
   useProtectedPage();
@@ -65,6 +66,7 @@ export const ProfileScreen = () => {
           <CardHistory></CardHistory>
         )}
       </DivHistoryCard>
+      <Footer />
     </Container>
   );
 };
