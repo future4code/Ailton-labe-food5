@@ -73,7 +73,7 @@ export const RestaurantScreen = () => {
             )
           })}
         </div>
-        <div>
+        {(entry?.length !== 0) && <div>
           <BorderTitle>
             <p>Acompanhamentos</p>
           </BorderTitle>
@@ -92,8 +92,8 @@ export const RestaurantScreen = () => {
               </ProductContainer>
             )
           })}
-        </div>
-        <div>
+        </div>}
+        {(drink?.length !== 0) &&<div>
           <BorderTitle>
             <p>Bebidas</p>
           </BorderTitle>
@@ -112,7 +112,7 @@ export const RestaurantScreen = () => {
               </ProductContainer>
             )
           })}
-        </div>
+        </div>}
       </RestaurantContainer>
     </RestaurantCard>
   )
