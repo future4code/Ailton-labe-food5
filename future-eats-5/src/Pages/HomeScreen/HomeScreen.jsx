@@ -94,36 +94,40 @@ export const HomeScreen = () => {
 
   return (
     <div>
-      <Header text={"FutureEats"}/>
-      <ContainerLupe>
-        <label>
-          <img src={lupaicon} />
-          <input
-            name={"search"}
-            placeholder="Restaurante"
-            value={form.search}
-            onChange={onChange}
-          />
-        </label>
-      </ContainerLupe>
+      <Header text={"FutureEats"} />
+      {addressToken && (
+        <ContainerLupe>
+          <label>
+            <img src={lupaicon} />
+            <input
+              name={"search"}
+              placeholder="Restaurante"
+              value={form.search}
+              onChange={onChange}
+            />
+          </label>
+        </ContainerLupe>
+      )}
       {addressToken && (
         <ContainerCategory>
           <p onClick={unSearch}>Todos</p>
-          {data?.map(({ category }) => {
-            return <p onClick={() => onClickCategory(category)}>{category}</p>;
+          {data?.map((data, index) => {
+            return <p onClick={() => onClickCategory(data.category)} key={index}>{data.category}</p>;
           })}
         </ContainerCategory>
       )}
       {searching && (
         <ContainerRestaurants>{categoryRestaurants}</ContainerRestaurants>
       )}
-      {searching || <ContainerRestaurants>{restaurants}</ContainerRestaurants>}
-      {addressToken || (
+      {!searching && <ContainerRestaurants>{restaurants}</ContainerRestaurants>}
+      {!addressToken && (
         <ContainerRedirect>
           <span>
             Cadastre seu endereço para descobrir restaurantes perto de você
           </span>
-          <Button onClick={()=>GoTo(navigate, "/address")}>Cadastrar endereço</Button>
+          <Button onClick={() => GoTo(navigate, "/address")}>
+            Cadastrar endereço
+          </Button>
         </ContainerRedirect>
       )}
     </div>
