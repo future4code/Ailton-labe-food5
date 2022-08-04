@@ -118,6 +118,9 @@ export const HomeScreen = () => {
           })}
         </ContainerCategory>
       )}
+      {!searching && (
+        <ContainerRestaurants>{restaurants}</ContainerRestaurants>
+      )}
       {searching && (
         <ContainerRestaurants>{categoryRestaurants}</ContainerRestaurants>
       )}
@@ -129,7 +132,7 @@ export const HomeScreen = () => {
             <Button onClick={()=>GoTo(navigate, "/address")}>Cadastrar endereço</Button>
           </ContainerRedirect>
         )} 
-      <Footer />
+      <Footer active={"home"}/>
 
     </div>
   );

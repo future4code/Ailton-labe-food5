@@ -22,7 +22,7 @@ export const CartScreen = () => {
         <AddressTitleStyle>Endereço cadastrado</AddressTitleStyle>
         <PStyle>{profileInfo?.user?.address}</PStyle>
       </DivAddress>
-      <Footer />
+      <Footer active={"cart"} />
     </Container>
   );
 }

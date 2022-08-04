@@ -66,7 +66,7 @@ export const ProfileScreen = () => {
           <CardHistory></CardHistory>
         )}
       </DivHistoryCard>
-      <Footer />
+      <Footer active={"profile"}/>
     </Container>
   );
 };
