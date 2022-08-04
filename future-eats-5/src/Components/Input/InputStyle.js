@@ -7,10 +7,12 @@ export const Container = styled.div`
   margin: 0 auto;
   width: 100%;
   transition: 1s ease-in-out;
+  max-width: 480px;
   > input {
     border: 1px solid #d0d0d0;
     padding: 16px;
     width: 100%;
+    max-width: 480px;
     height: 60px;
     outline: 0;
     :focus ~ label {

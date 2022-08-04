@@ -96,31 +96,31 @@ export const HomeScreen = () => {
 
   return (
     <div>
-      <Header text={"FutureEats"}/>
-      <ContainerLupe>
-        <label>
-          <img src={lupaicon} />
-          <input
-            name={"search"}
-            placeholder="Restaurante"
-            value={form.search}
-            onChange={onChange}
-          />
-        </label>
-      </ContainerLupe>
+      <Header text={"FutureEats"} />
+      {addressToken && (
+        <ContainerLupe>
+          <label>
+            <img src={lupaicon} />
+            <input
+              name={"search"}
+              placeholder="Restaurante"
+              value={form.search}
+              onChange={onChange}
+            />
+          </label>
+        </ContainerLupe>
+      )}
       {addressToken && (
         <ContainerCategory>
           <p onClick={unSearch}>Todos</p>
-          {data?.map(({ category, index }) => {
-            return <p onClick={() => onClickCategory(category)} key={index}>{category}</p>;
+          {data?.map((data, index) => {
+            return <p onClick={() => onClickCategory(data.category)} key={index}>{data.category}</p>;
           })}
         </ContainerCategory>
       )}
       {searching && (
         <ContainerRestaurants>{categoryRestaurants}</ContainerRestaurants>
       )}
-      {searching || <ContainerRestaurants>{restaurants}</ContainerRestaurants>}
-  
         { !addressToken && (
           <ContainerRedirect>
             <span>
@@ -130,6 +130,7 @@ export const HomeScreen = () => {
           </ContainerRedirect>
         )} 
       <Footer />
+
     </div>
   );
 };
