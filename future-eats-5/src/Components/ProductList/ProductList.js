@@ -14,7 +14,7 @@ const ProductList = ({array, showPopUp}) => {
           <ProductContainer key={product.id}>
             <img src={product.photoUrl} alt={product.name} />
             <div>
-                {console.log('teste')}
+                
                 
               {product.name.length <= 20 && <h4>{product.name}</h4>}
               {product.name.length > 20 && (
@@ -23,7 +23,7 @@ const ProductList = ({array, showPopUp}) => {
               <p>{product.description}</p>
               <ButtonPrice>
                 <Price>R${product.price}0</Price>
-                <AddButton onClick={showPopUp}> adicionar </AddButton>
+                <AddButton onClick={()=>showPopUp(product.id)}> adicionar </AddButton>
               </ButtonPrice>
             </div>
           </ProductContainer>

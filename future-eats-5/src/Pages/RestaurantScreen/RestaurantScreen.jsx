@@ -12,6 +12,7 @@ import {
   RestaurantImg,
   RestaurantContainer,
   ProductContainer,
+  Options,
   DivQuantity,
   AddButton,
   PopUpStyle,
@@ -20,6 +21,7 @@ import {
   IconStyle,
   Price,
   ButtonPrice,
+  AddStyle,
   BorderTitle,
 } from "./styled";
 import ProductList from "../../Components/ProductList/ProductList";
@@ -33,6 +35,8 @@ export const RestaurantScreen = () => {
   const [detail, setDetail] = useState([]);
   const { addToCart, cart, setCart } = useContext(CartContext);
   const [popUp, setPopUp] = useState(false);
+  const [quantity, setQuantity] = useState(1)
+  const [productId, setProductId] = useState()
 
   useEffect(() => {
     axios
@@ -49,9 +53,17 @@ export const RestaurantScreen = () => {
       });
   }, []);
 
-  const showPopUp = () => {
-    setPopUp(true);
+  const showPopUp = (id) => {
+    setPopUp(!popUp);
+     setProductId(id)
+     console.log(id)
   };
+
+  const onChangeQuant = (event) => {
+    setQuantity(event.target.value)
+    console.log(event.target.value)
+  }
+  
 
   const mainCourse = detail?.products?.filter((i) => {
     return i.category !== "Acompanhamento" && i.category !== "Bebida";
@@ -66,18 +78,21 @@ export const RestaurantScreen = () => {
 
   return (
     <RestaurantCard>
-      <Header text={detail.name} arrow={true}/>
       {popUp && (
         <DivPopUp>
           <PopUpStyle>
             <TitleStyle>Selecione a quantidade desejada</TitleStyle>
-            <DivQuantity>
-              <p>0</p>
-              <IconStyle src={DropDown} />
+            <DivQuantity value={quantity} onChange={onChangeQuant}>
+              {Array.from({ length: 10 }).map((data, index) => {
+                return <Options key={index}>{index + 1}</Options>;
+              })}
             </DivQuantity>
+            <AddStyle onClick={()=> addToCart(productId, quantity, popUp, setPopUp)}>ADICIONAR AO CARRINHO</AddStyle>
           </PopUpStyle>
         </DivPopUp>
       )}
+      <Header text={detail.name} arrow={true} />
+      
       <RestaurantContainer>
         <RestaurantImg src={detail.logoUrl} alt="logo" />
         <p id="title">{detail.name}</p>
