@@ -14,6 +14,7 @@ const ProductList = ({array, showPopUp}) => {
           <ProductContainer key={product.id}>
             <img src={product.photoUrl} alt={product.name} />
             <div>
+                {console.log('teste')}
               {product.name.length <= 20 && <h4>{product.name}</h4>}
               {product.name.length > 20 && (
                 <h4>{product.name.slice(0, 17) + "..."}</h4>
