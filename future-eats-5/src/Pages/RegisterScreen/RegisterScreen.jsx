@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Logo from "../../Assets/logofutureeats.png";
-import { Container, DivLogo, LogoStyle, Title } from "./styled";
+import { Container, DivLogo, ErrorText, LogoStyle, Title } from "./styled";
 import { Form } from "../../Global/GlobalStyle";
 import { Input } from "../../Components/Input/Input";
 import { Button } from "../../Components/Button";
@@ -10,9 +10,12 @@ import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../Hooks/useForm";
 import { BaseUrl } from "../../Constants/BaseUrl";
+import { useState } from "react";
 
 export const RegisterScreen = () => {
   const navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(false);
   const { form, onChange, cleanFields } = useForm({
     name: "",
     email: "",
@@ -21,14 +24,22 @@ export const RegisterScreen = () => {
   });
   const register = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(`${BaseUrl}signup`, form);
-      GoTo(navigate, "/address");
-      localStorage.setItem("token", response.data.token);
-    } catch (error) {
-      window.alert(error.reponse.data.message);
+    if (confirmPassword === form.password) {
+      try {
+        setError(false);
+        const response = await axios.post(`${BaseUrl}signup`, form);
+        GoTo(navigate, "/address");
+        localStorage.setItem("token", response.data.token);
+      } catch (error) {
+        window.alert(error.reponse.data.message);
+      }
+    } else {
+      setError(true);
     }
-  }; 
+  };
+  const onChangeConfirm = (e) => {
+    setConfirmPassword(e.target.value);
+  };
   return (
     <Container>
       <Header arrow={true} />
@@ -37,6 +48,7 @@ export const RegisterScreen = () => {
       </DivLogo>
       <Title>Cadastrar</Title>
       <Form onSubmit={register}>
+        {console.log(form)}
         <Input
           name="name"
           value={form.name}
@@ -74,10 +86,12 @@ export const RegisterScreen = () => {
         />
         <Input
           required
-          label={"Confirmar "}
+          onChange={onChangeConfirm}
+          label={"Confirme sua senha "}
           pattern="^.{6,}$"
           type={"password"}
         />
+        {error && <ErrorText>Verifique se a senha é igual</ErrorText>}
         <Button>Criar</Button>
       </Form>
     </Container>

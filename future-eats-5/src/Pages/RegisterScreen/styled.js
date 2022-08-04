@@ -39,3 +39,7 @@ export const Form = styled.form`
   align-items: center;
   justify-content: center;
 `;
+
+export const ErrorText = styled.p `
+color: red;
+`
