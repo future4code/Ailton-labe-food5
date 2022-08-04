@@ -6,7 +6,7 @@ import { useRequestData } from "../../Hooks/useRequestData";
 import axios from "axios";
 import { useContext } from "react";
 import { CartContext } from "../../Global/context";
-import DropDown from '../../Assets/dropdown1.png'
+import DropDown from "../../Assets/dropdown1.png";
 import {
   RestaurantCard,
   RestaurantImg,
@@ -22,6 +22,7 @@ import {
   ButtonPrice,
   BorderTitle,
 } from "./styled";
+import ProductList from "../../Components/ProductList/ProductList";
 
 export const RestaurantScreen = () => {
   useProtectedPage();
@@ -70,7 +71,7 @@ export const RestaurantScreen = () => {
             <TitleStyle>Selecione a quantidade desejada</TitleStyle>
             <DivQuantity>
               <p>0</p>
-              <IconStyle src={DropDown}/>
+              <IconStyle src={DropDown} />
             </DivQuantity>
           </PopUpStyle>
         </DivPopUp>
@@ -88,45 +89,14 @@ export const RestaurantScreen = () => {
           <BorderTitle>
             <p>Principais</p>
           </BorderTitle>
-          {mainCourse?.map((product) => {
-            return (
-              <ProductContainer key={product.id}>
-                <img src={product.photoUrl} alt={product.name} />
-                <div>
-                  <h4>{product.name}</h4>
-                  <p>{product.description}</p>
-                  <ButtonPrice>
-                    <Price>R${product.price}0</Price>
-                    <AddButton onClick={showPopUp}> adicionar </AddButton>
-                  </ButtonPrice>
-                </div>
-              </ProductContainer>
-            );
-          })}
+          <ProductList array={mainCourse} showPopUp={showPopUp} />
         </div>
         {entry?.length !== 0 && (
           <div>
             <BorderTitle>
               <p>Acompanhamentos</p>
             </BorderTitle>
-            {entry?.map((product) => {
-              return (
-                <ProductContainer key={product.id}>
-                  <img src={product.photoUrl} alt={product.name} />
-                  <div>
-                    <h4>{product.name}</h4>
-                    <p>{product.description}</p>
-                    <ButtonPrice>
-                      <Price>R${product.price}</Price>
-                      <AddButton onClick={() => addToCart(product.id, 1)}>
-                        {" "}
-                        adicionar{" "}
-                      </AddButton>
-                    </ButtonPrice>
-                  </div>
-                </ProductContainer>
-              );
-            })}
+            <ProductList array={entry} showPopUp={showPopUp} />
           </div>
         )}
         {drink?.length !== 0 && (
@@ -134,24 +104,7 @@ export const RestaurantScreen = () => {
             <BorderTitle>
               <p>Bebidas</p>
             </BorderTitle>
-            {drink?.map((product) => {
-              return (
-                <ProductContainer key={product.id}>
-                  <img src={product.photoUrl} alt={product.name} />
-                  <div>
-                    <h4>{product.name}</h4>
-                    <p>{product.description}</p>
-                    <ButtonPrice>
-                      <Price>R${product.price}0</Price>
-                      <AddButton onClick={() => addToCart(product.id, 1)}>
-                        {" "}
-                        adicionar{" "}
-                      </AddButton>
-                    </ButtonPrice>
-                  </div>
-                </ProductContainer>
-              );
-            })}
+            <ProductList array={drink} showPopUp={showPopUp} />
           </div>
         )}
       </RestaurantContainer>

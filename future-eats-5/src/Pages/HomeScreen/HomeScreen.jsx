@@ -117,6 +117,7 @@ export const HomeScreen = () => {
           })}
         </ContainerCategory>
       )}
+      {!searching && <ContainerRestaurants>{restaurants}</ContainerRestaurants>}
       {searching && (
         <ContainerRestaurants>{categoryRestaurants}</ContainerRestaurants>
       )}

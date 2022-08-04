@@ -13,7 +13,7 @@ import SplashScreen from "../../Components/SplashScreen/SplashScreen";
 export const LoginScreen = () => {
   const { form, onChange, cleanFields } = useForm({ email: "", password: "" });
   const navigate = useNavigate();
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
   const addressToken = localStorage.getItem("addressToken");
   const [splashScreenTime, setSplashScreenTime] = useState(1);
   const [splashScreenShow, setSplashScreenShow] = useState(true);
