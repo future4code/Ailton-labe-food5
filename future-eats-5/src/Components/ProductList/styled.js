@@ -40,6 +40,7 @@ export const ProductContainer = styled.div`
 `;
 
 export const ButtonPrice = styled.div`
+position: relative;
   width: 215px;
   height: 68px;
   padding-top: 18%;
@@ -54,6 +55,10 @@ export const Price = styled.p`
 `;
 
 export const AddButton = styled.button`
+  
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
   border: 1.5px solid #5cb646;
   color: #5cb646;
   background-color: white;

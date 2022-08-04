@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const RestaurantCard = styled.div`
   width: 100%;
   margin: 0 auto;
+  overflow: hidden;
 `;
 export const RestaurantContainer = styled.div`
   margin-left: 17px;
@@ -99,6 +100,7 @@ export const BorderTitle = styled.div`
   }
 `;
 export const DivPopUp = styled.div`
+  z-index: 1;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -106,32 +108,45 @@ export const DivPopUp = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: auto;
 `;
 export const PopUpStyle = styled.div`
+ 
   width: 328px;
   height: 216px;
-  background-color: blue;
+  background-color: white;
   padding: 0px 16px;
 `;
 
-export const TitleStyle = styled.p `
-
-padding-top: 43px;
-padding-bottom: 31px;
-display: flex;
-align-items: center;
-justify-content: center;
+export const TitleStyle = styled.p`
+  padding-top: 43px;
+  padding-bottom: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+`;
+export const DivQuantity = styled.select`
+  width: 100%;
+  height: 56px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  top: 0;
+  bottom: 100%;
+`;
+export const IconStyle = styled.img`
+  width: 24px;
+`;
+export const Options = styled.option`
 `
-export const DivQuantity = styled.div `
-width: 100%;
-height: 56px;
-background-color: white;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 0 16px;
-`
-export const IconStyle = styled.img `
-width: 24px;
-`
-
+export const AddStyle = styled.p`
+  padding-top: 28px;
+  padding-bottom: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #5cb646;
+`;
