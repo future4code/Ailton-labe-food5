@@ -91,7 +91,7 @@ export const RestaurantScreen = () => {
               })}
             </DivQuantity>
             <AddStyle
-              onClick={() => addToCart(product, quantity, popUp, setPopUp, setQuantity)}
+              onClick={() => addToCart(product, quantity, popUp, setPopUp, setQuantity, detail)}
             >
               ADICIONAR AO CARRINHO
             </AddStyle>

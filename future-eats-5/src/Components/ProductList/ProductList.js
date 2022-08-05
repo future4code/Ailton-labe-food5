@@ -24,7 +24,7 @@ const ProductList = ({ array, showPopUp }) => {
                 <Description>{description}</Description>
               </NamesContainer>
               <ButtonPrice>
-                <Price>R${price}0</Price>
+                <Price>R${price}</Price>
                 <AddButton onClick={() => showPopUp(description, id, name, photoUrl, price)}>
                   adicionar
                 </AddButton>

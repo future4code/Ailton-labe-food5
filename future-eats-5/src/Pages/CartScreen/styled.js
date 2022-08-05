@@ -21,3 +21,15 @@ export const AddressTitleStyle = styled.p`
 `;
 export const PStyle = styled.p `
 `
+export const DivDetail = styled.div`
+width: 100%;
+padding: 16px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+align-items: flex-start;
+justify-content: center;
+`
+export const RestaurantName = styled.p`
+  color: #5cb646;
+`;
