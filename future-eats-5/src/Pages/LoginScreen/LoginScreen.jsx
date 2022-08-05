@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Logo from "../../Assets/logofutureeats.png";
 import { useNavigate } from "react-router-dom";
-import { Container, Title, DivLogo, LogoStyle, Form, Text, A } from "./styled";
+import { Container, Title, DivLogo, LogoStyle, Form, Text, A, EyeImage, EyeButton, PasswordContainer } from "./styled";
 import { Input } from "../../Components/Input/Input";
 import { Button } from "../../Components/Button";
 import { GoTo } from "../../Functions/GoTo";
 import { useForm } from "../../Hooks/useForm";
 import { BaseUrl } from "../../Constants/BaseUrl";
 import SplashScreen from "../../Components/SplashScreen/SplashScreen";
+import EyeHidden from "../../Assets/hidden-eye.png"
 
 export const LoginScreen = () => {
   const { form, onChange, cleanFields } = useForm({ email: "", password: "" });
@@ -17,6 +18,10 @@ export const LoginScreen = () => {
   const addressToken = localStorage.getItem("addressToken");
   const [splashScreenTime, setSplashScreenTime] = useState(1);
   const [splashScreenShow, setSplashScreenShow] = useState(true);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const login = async (event) => {
     event.preventDefault();
@@ -57,15 +62,18 @@ export const LoginScreen = () => {
           label={"E-mail"}
           pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
         />
-        <Input
-          required
-          name="password"
-          value={form.password}
-          onChange={onChange}
-          pattern="^.{6,}$"
-          type={"password"}
-          label={"Senha"}
-        />
+        <PasswordContainer>
+          <Input
+            required
+            name="password"
+            value={form.password}
+            onChange={onChange}
+            pattern="^.{6,}$"
+            type={passwordShown ? "text" : "password"}
+            label={"Senha"}
+          />
+          <EyeImage src={EyeHidden} onClick={togglePassword} />
+        </PasswordContainer>
         <Button>Entrar</Button>
       </Form>
       <Text>
