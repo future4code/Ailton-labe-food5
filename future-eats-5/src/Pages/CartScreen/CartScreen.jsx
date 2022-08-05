@@ -1,4 +1,4 @@
-import { useEffect, React } from "react";
+import { useEffect, React, useContext } from "react";
 import { useProtectedPage } from "../../Hooks/useProtectedPage";
 import { Header } from "../../Components/Header/Header";
 import { Container, AddressTitleStyle, DivAddress, PStyle, DivDetail, RestaurantName } from "./styled";
@@ -7,12 +7,15 @@ import { BaseUrl } from "../../Constants/BaseUrl";
 import { useContext } from "react";
 import { CartContext } from "../../Global/context";
 import Footer from "../../Components/Footer/Footer";
+import { CartContext } from "../../Global/context";
 import ProductList from "../../Components/ProductList/ProductList";
+
 
 export const CartScreen = () => {
   useProtectedPage();
   const token = localStorage.getItem("token");
-  const { profileInfo, getProfile } = useProfile();
+  const { profileInfo, getProfile} = useProfile(); 
+  const { cart } = useContext(CartContext);
   const { cart, setCart } = useContext(CartContext);
   const cartString = localStorage.getItem("cart");
   const cartObject = JSON.parse(cartString);

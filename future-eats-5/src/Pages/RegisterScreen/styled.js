@@ -43,3 +43,19 @@ export const Form = styled.form`
 export const ErrorText = styled.p `
 color: red;
 `
+
+export const PasswordContainer = styled.div`
+width: 100%;
+max-width: 480px;
+height: 60px;
+position: relative;
+display: flex;
+align-items: center
+`
+
+export const EyeImage = styled.img`
+width: 24px;
+height: 24px;
+position: absolute;
+right: 5%;
+`
