@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Logo from "../../Assets/logofutureeats.png";
-import { Container, DivLogo, ErrorText, LogoStyle, Title } from "./styled";
+import { Container, DivLogo, ErrorText, EyeImage, LogoStyle, PasswordContainer, Title } from "./styled";
 import { Form } from "../../Global/GlobalStyle";
 import { Input } from "../../Components/Input/Input";
 import { Button } from "../../Components/Button";
@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "../../Hooks/useForm";
 import { BaseUrl } from "../../Constants/BaseUrl";
 import { useState } from "react";
+import EyeHidden from "../../Assets/hidden-eye.png";
 
 export const RegisterScreen = () => {
   const navigate = useNavigate();
@@ -22,6 +23,15 @@ export const RegisterScreen = () => {
     cpf: "",
     password: "",
   });
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+  const toggleConfirmPassword = () => {
+    setConfirmPasswordShown(!confirmPasswordShown);
+  };
+
   const register = async (event) => {
     event.preventDefault();
     if (confirmPassword === form.password) {
@@ -74,6 +84,7 @@ export const RegisterScreen = () => {
           pattern="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}"
           title="Preencha um CPF válido"
         />
+        <PasswordContainer>
         <Input
           name="password"
           value={form.password}
@@ -81,16 +92,21 @@ export const RegisterScreen = () => {
           required
           label={"Senha"}
           pattern="^.{6,}$"
-          type={"password"}
+          type={passwordShown ? "text" : "password"}
           title="Preencha uma senha com no mínimo 6 caracteres"
         />
+        <EyeImage src={EyeHidden} onClick={togglePassword} />
+        </PasswordContainer>
+        <PasswordContainer>
         <Input
           required
           onChange={onChangeConfirm}
           label={"Confirme sua senha "}
           pattern="^.{6,}$"
-          type={"password"}
+          type={confirmPasswordShown ? "text" : "password"}
         />
+        <EyeImage src={EyeHidden} onClick={toggleConfirmPassword} />
+        </PasswordContainer>
         {error && <ErrorText>Verifique se a senha é igual</ErrorText>}
         <Button>Criar</Button>
       </Form>

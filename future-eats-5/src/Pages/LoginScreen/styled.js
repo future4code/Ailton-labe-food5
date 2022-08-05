@@ -46,3 +46,19 @@ export const Text = styled.p`
 export const A = styled.a`
 cursor: pointer;
 `
+
+export const PasswordContainer = styled.div`
+width: 100%;
+max-width: 480px;
+height: 60px;
+position: relative;
+display: flex;
+align-items: center
+`
+
+export const EyeImage = styled.img`
+width: 24px;
+height: 24px;
+position: absolute;
+right: 5%;
+`
