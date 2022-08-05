@@ -25,12 +25,12 @@ export const CartScreen = () => {
   }, []);
   console.log(cartObject);
 
-  const subTotal = cartObject.reduce((prevValue, currentValue) => {
-    return prevValue.price + currentValue.price
-  }
-  ) 
+  // const subTotal = cartObject.reduce((prevValue, currentValue) => {
+  //   return prevValue.price + currentValue.price
+  // }
+  // ) 
 
-  console.log(subTotal)
+  // console.log(subTotal)
 
   return (
     <Container>
