@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useProtectedPage } from "../../Hooks/useProtectedPage";
 import { BaseUrl } from "../../Constants/BaseUrl";
 import { useNavigate, useParams } from "react-router-dom";
-import { useRequestData } from "../../Hooks/useRequestData";
 import axios from "axios";
 import { useContext } from "react";
 import { CartContext } from "../../Global/context";
@@ -11,16 +10,11 @@ import {
   RestaurantCard,
   RestaurantImg,
   RestaurantContainer,
-  ProductContainer,
   Options,
   DivQuantity,
-  AddButton,
   PopUpStyle,
   DivPopUp,
   TitleStyle,
-  IconStyle,
-  Price,
-  ButtonPrice,
   AddStyle,
   BorderTitle,
 } from "./styled";
@@ -29,7 +23,6 @@ import { Header } from "../../Components/Header/Header";
 
 export const RestaurantScreen = () => {
   useProtectedPage();
-  const navigate = useNavigate();
   const pathParams = useParams();
   const addressToken = localStorage.getItem("addressToken");
   const [detail, setDetail] = useState([]);
@@ -99,7 +92,6 @@ export const RestaurantScreen = () => {
         </DivPopUp>
       )}
       <Header text={detail.name} arrow={true} />
-      {console.log(cart)}
       <RestaurantContainer>
         <RestaurantImg src={detail.logoUrl} alt="logo" />
         <p id="title">{detail.name}</p>
