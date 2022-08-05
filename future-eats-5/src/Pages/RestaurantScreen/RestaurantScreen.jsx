@@ -54,7 +54,11 @@ export const RestaurantScreen = () => {
     price,
     restaurantNameProp
   ) => {
-    if (restaurantLocalStorage === null || restaurantLocalStorage[0]?.restaurantName === restaurantNameProp || restaurantLocalStorage.length === 0) {
+    if (
+      restaurantLocalStorage === null ||
+      restaurantLocalStorage[0]?.restaurantName === restaurantNameProp ||
+      restaurantLocalStorage.length === 0
+    ) {
       setPopUp(!popUp);
       setProduct({
         description: description,
