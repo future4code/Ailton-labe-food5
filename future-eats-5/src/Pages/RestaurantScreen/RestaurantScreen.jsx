@@ -35,8 +35,8 @@ export const RestaurantScreen = () => {
   const [detail, setDetail] = useState([]);
   const { addToCart, cart, setCart } = useContext(CartContext);
   const [popUp, setPopUp] = useState(false);
-  const [quantity, setQuantity] = useState(1)
-  const [productId, setProductId] = useState()
+  const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState({});
 
   useEffect(() => {
     axios
@@ -53,17 +53,20 @@ export const RestaurantScreen = () => {
       });
   }, []);
 
-  const showPopUp = (id) => {
+  const showPopUp = (description, id, name, photoUrl, price) => {
     setPopUp(!popUp);
-     setProductId(id)
-     console.log(id)
+    setProduct({
+      description: description,
+      id: id,
+      name: name,
+      photoUrl: photoUrl,
+      price: price,
+    });
   };
 
   const onChangeQuant = (event) => {
-    setQuantity(event.target.value)
-    console.log(event.target.value)
-  }
-  
+    setQuantity(event.target.value);
+  };
 
   const mainCourse = detail?.products?.filter((i) => {
     return i.category !== "Acompanhamento" && i.category !== "Bebida";
@@ -87,12 +90,16 @@ export const RestaurantScreen = () => {
                 return <Options key={index}>{index + 1}</Options>;
               })}
             </DivQuantity>
-            <AddStyle onClick={()=> addToCart(productId, quantity, popUp, setPopUp)}>ADICIONAR AO CARRINHO</AddStyle>
+            <AddStyle
+              onClick={() => addToCart(product, quantity, popUp, setPopUp, setQuantity)}
+            >
+              ADICIONAR AO CARRINHO
+            </AddStyle>
           </PopUpStyle>
         </DivPopUp>
       )}
       <Header text={detail.name} arrow={true} />
-      
+      {console.log(cart)}
       <RestaurantContainer>
         <RestaurantImg src={detail.logoUrl} alt="logo" />
         <p id="title">{detail.name}</p>
@@ -125,7 +132,6 @@ export const RestaurantScreen = () => {
           </div>
         )}
       </RestaurantContainer>
-      {console.log(cart)}
     </RestaurantCard>
   );
 };

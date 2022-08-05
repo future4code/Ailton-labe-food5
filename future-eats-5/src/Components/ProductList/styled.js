@@ -1,46 +1,23 @@
 import styled from "styled-components";
 
 export const ProductContainer = styled.div`
-  width: 328px;
-  height: 112px;
-  margin: 7px 0 0;
-  border-radius: 8px;
-  border: 1px solid #b8b8b8;
   display: flex;
+  width: 96%;
+  height: 112px;
+  border-radius: 8px;
+  margin: 8px 0px;
+  border: 1px solid #b8b8b8;
   > img {
     width: 95px;
     height: 110px;
     margin: 0 16px 0 0;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    background-color: #d8d8d8;
-  }
-  
-  > div > h4 {
-    color: #5cb646;
-    height: 18px;
-    //margin: 14px 49px 8px 16px;
-    //font-family: Roboto;
-    margin-top: 4px;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: -0.39px;
-  }
-  > div > p {
-    margin-top: 4px;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: -0.29px;
   }
 `;
 
 export const ButtonPrice = styled.div`
-position: relative;
+  position: relative;
   width: 215px;
   height: 68px;
   padding-top: 18%;
@@ -55,7 +32,6 @@ export const Price = styled.p`
 `;
 
 export const AddButton = styled.button`
-  
   position: absolute;
   bottom: -1px;
   right: -1px;
@@ -71,3 +47,15 @@ export const AddButton = styled.button`
   margin-right: 0;
   margin-bottom: 0;
 `;
+
+export const NamesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Title = styled.h1 `
+`
+
+export const Description = styled.p`
+font-size: 12px;
+`

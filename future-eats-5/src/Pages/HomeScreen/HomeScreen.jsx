@@ -15,7 +15,7 @@ import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../Components/Button";
 import { Header } from "../../Components/Header/Header";
-import Footer from "../../Components/Footer/Footer"
+import Footer from "../../Components/Footer/Footer";
 
 export const HomeScreen = () => {
   const token = localStorage.getItem("token");
@@ -50,8 +50,12 @@ export const HomeScreen = () => {
     })
     .map((restaurant) => {
       return (
-        <ContainerRestaurant 
-        onClick={() => {GoTo(navigate, `/restaurant/${restaurant.id}`)}} key={restaurant.id}>
+        <ContainerRestaurant
+          onClick={() => {
+            GoTo(navigate, `/restaurant/${restaurant.id}`);
+          }}
+          key={restaurant.id}
+        >
           <img src={restaurant.logoUrl} alt="foto logo" />
           <div>
             <p id="nameRes">{restaurant.name}</p>
@@ -114,26 +118,29 @@ export const HomeScreen = () => {
         <ContainerCategory>
           <p onClick={unSearch}>Todos</p>
           {data?.map((data, index) => {
-            return <p onClick={() => onClickCategory(data.category)} key={index}>{data.category}</p>;
+            return (
+              <p onClick={() => onClickCategory(data.category)} key={index}>
+                {data.category}
+              </p>
+            );
           })}
         </ContainerCategory>
       )}
-      {!searching && (
-        <ContainerRestaurants>{restaurants}</ContainerRestaurants>
-      )}
+      {!searching && <ContainerRestaurants>{restaurants}</ContainerRestaurants>}
       {searching && (
         <ContainerRestaurants>{categoryRestaurants}</ContainerRestaurants>
       )}
-        { !addressToken && (
-          <ContainerRedirect>
-            <span>
-              Cadastre seu endereço para descobrir restaurantes perto de você
-            </span>
-            <Button onClick={()=>GoTo(navigate, "/address")}>Cadastrar endereço</Button>
-          </ContainerRedirect>
-        )} 
-      <Footer active={"home"}/>
-
+      {!addressToken && (
+        <ContainerRedirect>
+          <span>
+            Cadastre seu endereço para descobrir restaurantes perto de você
+          </span>
+          <Button onClick={() => GoTo(navigate, "/address")}>
+            Cadastrar endereço
+          </Button>
+        </ContainerRedirect>
+      )}
+      <Footer active={"home"} />
     </div>
   );
 };

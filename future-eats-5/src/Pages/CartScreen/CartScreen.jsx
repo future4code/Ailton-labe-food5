@@ -1,15 +1,15 @@
-import { useEffect, React } from 'react'
-import { useProtectedPage } from '../../Hooks/useProtectedPage'
-import { Header } from '../../Components/Header/Header'
-import { Container, AddressTitleStyle, DivAddress, PStyle } from './styled'
-import { useProfile } from '../../Hooks/useProfile'
-import { BaseUrl } from '../../Constants/BaseUrl'
-import Footer from "../../Components/Footer/Footer"
+import { useEffect, React } from "react";
+import { useProtectedPage } from "../../Hooks/useProtectedPage";
+import { Header } from "../../Components/Header/Header";
+import { Container, AddressTitleStyle, DivAddress, PStyle } from "./styled";
+import { useProfile } from "../../Hooks/useProfile";
+import { BaseUrl } from "../../Constants/BaseUrl";
+import Footer from "../../Components/Footer/Footer";
 
 export const CartScreen = () => {
-  useProtectedPage()
+  useProtectedPage();
   const token = localStorage.getItem("token");
-  const { profileInfo, getProfile} = useProfile(); 
+  const { profileInfo, getProfile } = useProfile();
 
   useEffect(() => {
     getProfile(`${BaseUrl}profile`, token);
@@ -25,4 +25,4 @@ export const CartScreen = () => {
       <Footer active={"cart"} />
     </Container>
   );
-}
+};
