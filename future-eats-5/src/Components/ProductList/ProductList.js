@@ -15,7 +15,15 @@ import {
 
 const ProductList = ({ array, showPopUp }) => {
   const { cart, setCart } = useContext(CartContext);
+  const cartString = localStorage.getItem("cart");
+  const cartObject = JSON.parse(cartString);
+
+  console.log(cartObject);
   const cartMap = cart?.map(({ id }) => {
+    return id;
+  });
+
+  const cartMapObject = cartObject?.map(({ id }) => {
     return id;
   });
   const removeFromCart = (id) => {
@@ -35,6 +43,7 @@ const ProductList = ({ array, showPopUp }) => {
     <>
       {array?.map(({ description, id, name, photoUrl, price }) => {
         const indexOfItem = cartMap?.indexOf(id);
+        const indexOfItemObject = cartMapObject?.indexOf(id);
         const isInCart = cartMap?.some((data) => {
           return data === id;
         });
@@ -50,11 +59,15 @@ const ProductList = ({ array, showPopUp }) => {
               </NamesContainer>
               {isInCart && (
                 <QuantityContainer>
-                  <p>{cart[indexOfItem].quantity}</p>
+                  {cartObject ? (
+                    <p>{cart[indexOfItemObject].quantity}</p>
+                  ) : (
+                    <p>{cart[indexOfItem].quantity}</p>
+                  )}
                 </QuantityContainer>
               )}
               <ButtonPrice>
-                <Price>R${price}0</Price>
+                <Price>R${price}</Price>
                 {!isInCart ? (
                   <AddButton
                     color={"#5cb646"}
