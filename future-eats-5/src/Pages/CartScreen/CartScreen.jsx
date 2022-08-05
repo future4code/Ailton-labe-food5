@@ -14,8 +14,7 @@ import ProductList from "../../Components/ProductList/ProductList";
 export const CartScreen = () => {
   useProtectedPage();
   const token = localStorage.getItem("token");
-  const { profileInfo, getProfile} = useProfile(); 
-  const { cart } = useContext(CartContext);
+  const { profileInfo, getProfile} = useProfile();
   const { cart, setCart } = useContext(CartContext);
   const cartString = localStorage.getItem("cart");
   const cartObject = JSON.parse(cartString);
