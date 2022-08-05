@@ -12,7 +12,6 @@ import ProductList from "../../Components/ProductList/ProductList";
 export const CartScreen = () => {
   useProtectedPage();
   const token = localStorage.getItem("token");
-
   const { profileInfo, getProfile } = useProfile();
   const { cart, setCart } = useContext(CartContext);
   const cartString = localStorage.getItem("cart");
@@ -23,14 +22,6 @@ export const CartScreen = () => {
   useEffect(() => {
     getProfile(`${BaseUrl}profile`, token);
   }, []);
-  console.log(cartObject);
-
-  // const subTotal = cartObject.reduce((prevValue, currentValue) => {
-  //   return prevValue.price + currentValue.price
-  // }
-  // ) 
-
-  // console.log(subTotal)
 
   return (
     <Container>
@@ -39,7 +30,7 @@ export const CartScreen = () => {
         <AddressTitleStyle>Endereço cadastrado</AddressTitleStyle>
         <PStyle>{profileInfo?.user?.address}</PStyle>
       </DivAddress>
-      {cartObject ? (
+      {cartObject && cartObject.length !== 0 ? (
         <>
           <DivDetail>
             <RestaurantName>{localObject.name}</RestaurantName>

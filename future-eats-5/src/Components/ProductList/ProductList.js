@@ -13,17 +13,11 @@ import {
   RemoveBtn,
 } from "./styled";
 
-const ProductList = ({ array, showPopUp }) => {
-  const { cart, setCart } = useContext(CartContext);
-  const cartString = localStorage.getItem("cart");
-  const cartObject = JSON.parse(cartString);
-
-  console.log(cartObject);
+const ProductList = ({ array, showPopUp, restaurantName }) => {
+  const cartString = localStorage.getItem("cart")
+  const cart = JSON.parse(cartString)
+  const { setCart } = useContext(CartContext);
   const cartMap = cart?.map(({ id }) => {
-    return id;
-  });
-
-  const cartMapObject = cartObject?.map(({ id }) => {
     return id;
   });
   const removeFromCart = (id) => {
@@ -38,18 +32,19 @@ const ProductList = ({ array, showPopUp }) => {
       cartFilter.push(newItem);
     }
     setCart(cartFilter);
+    const cartString = JSON.stringify(cartFilter)
+    localStorage.setItem("cart", cartString)
   };
+
   return (
     <>
       {array?.map(({ description, id, name, photoUrl, price }) => {
         const indexOfItem = cartMap?.indexOf(id);
-        const indexOfItemObject = cartMapObject?.indexOf(id);
         const isInCart = cartMap?.some((data) => {
           return data === id;
         });
         return (
           <ProductContainer key={id}>
-            {console.log(cart)}
             <img src={photoUrl} alt={name} />
             <div>
               <NamesContainer>
@@ -59,11 +54,7 @@ const ProductList = ({ array, showPopUp }) => {
               </NamesContainer>
               {isInCart && (
                 <QuantityContainer>
-                  {cartObject ? (
-                    <p>{cart[indexOfItemObject].quantity}</p>
-                  ) : (
-                    <p>{cart[indexOfItem].quantity}</p>
-                  )}
+                  <p>{cart[indexOfItem].quantity}</p>
                 </QuantityContainer>
               )}
               <ButtonPrice>
@@ -72,7 +63,7 @@ const ProductList = ({ array, showPopUp }) => {
                   <AddButton
                     color={"#5cb646"}
                     onClick={() =>
-                      showPopUp(description, id, name, photoUrl, price)
+                      showPopUp(description, id, name, photoUrl, price, restaurantName)
                     }
                   >
                     adicionar
