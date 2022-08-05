@@ -30,7 +30,7 @@ export const RestaurantScreen = () => {
   const [popUp, setPopUp] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState({});
-
+  const restaurantLocalStorage = JSON.parse(localStorage.getItem("cart"));
   useEffect(() => {
     axios
       .get(`${BaseUrl}restaurants/${pathParams.id}`, {
@@ -46,15 +46,30 @@ export const RestaurantScreen = () => {
       });
   }, []);
 
-  const showPopUp = (description, id, name, photoUrl, price) => {
-    setPopUp(!popUp);
-    setProduct({
-      description: description,
-      id: id,
-      name: name,
-      photoUrl: photoUrl,
-      price: price,
-    });
+  const showPopUp = (
+    description,
+    id,
+    name,
+    photoUrl,
+    price,
+    restaurantNameProp
+  ) => {
+    if (
+      restaurantLocalStorage[0]?.restaurantName === restaurantNameProp ||
+      restaurantLocalStorage.length === 0
+    ) {
+      setPopUp(!popUp);
+      setProduct({
+        description: description,
+        id: id,
+        name: name,
+        photoUrl: photoUrl,
+        price: Number(price),
+        restaurantName: restaurantNameProp,
+      });
+    } else {
+      alert("Ele nao deixa");
+    }
   };
 
   const onChangeQuant = (event) => {
@@ -84,7 +99,16 @@ export const RestaurantScreen = () => {
               })}
             </DivQuantity>
             <AddStyle
-              onClick={() => addToCart(product, quantity, popUp, setPopUp, setQuantity, detail)}
+              onClick={() =>
+                addToCart(
+                  product,
+                  quantity,
+                  popUp,
+                  setPopUp,
+                  setQuantity,
+                  detail
+                )
+              }
             >
               ADICIONAR AO CARRINHO
             </AddStyle>
@@ -105,14 +129,22 @@ export const RestaurantScreen = () => {
           <BorderTitle>
             <p>Principais</p>
           </BorderTitle>
-          <ProductList showPopUp={showPopUp} array={mainCourse} />
+          <ProductList
+            showPopUp={showPopUp}
+            array={mainCourse}
+            restaurantName={detail.name}
+          />
         </div>
         {entry?.length !== 0 && (
           <div>
             <BorderTitle>
               <p>Acompanhamentos</p>
             </BorderTitle>
-            <ProductList showPopUp={showPopUp} array={entry} />
+            <ProductList
+              showPopUp={showPopUp}
+              array={entry}
+              restaurantName={detail.name}
+            />
           </div>
         )}
         {drink?.length !== 0 && (
@@ -120,7 +152,11 @@ export const RestaurantScreen = () => {
             <BorderTitle>
               <p>Bebidas</p>
             </BorderTitle>
-            <ProductList showPopUp={showPopUp} array={drink} />
+            <ProductList
+              showPopUp={showPopUp}
+              array={drink}
+              restaurantName={detail.name}
+            />
           </div>
         )}
       </RestaurantContainer>

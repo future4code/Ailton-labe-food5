@@ -25,14 +25,6 @@ export const CartScreen = () => {
   useEffect(() => {
     getProfile(`${BaseUrl}profile`, token);
   }, []);
-  console.log(cartObject);
-
-  // const subTotal = cartObject.reduce((prevValue, currentValue) => {
-  //   return prevValue.price + currentValue.price
-  // }
-  // ) 
-
-  // console.log(subTotal)
 
   return (
     <Container>
@@ -41,7 +33,7 @@ export const CartScreen = () => {
         <AddressTitleStyle>Endereço cadastrado</AddressTitleStyle>
         <PStyle>{profileInfo?.user?.address}</PStyle>
       </DivAddress>
-      {cartObject ? (
+      {cartObject && cartObject.length !== 0 ? (
         <>
           <DivDetail>
             <RestaurantName>{localObject.name}</RestaurantName>

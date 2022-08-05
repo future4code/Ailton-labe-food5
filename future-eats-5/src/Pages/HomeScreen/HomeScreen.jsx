@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useRequestData } from "../../Hooks/useRequestData";
 import { useForm } from "../../Hooks/useForm";
@@ -30,7 +30,6 @@ export const HomeScreen = () => {
     search: "",
   });
   const navigate = useNavigate();
-  //  console.log(data)
   const unSearch = () => {
     setSearching(false);
   };
