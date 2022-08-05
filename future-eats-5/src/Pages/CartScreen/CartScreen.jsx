@@ -10,11 +10,12 @@ export const CartScreen = () => {
   useProtectedPage()
   const token = localStorage.getItem("token");
   const { profileInfo, getProfile} = useProfile(); 
+  const { cart } = useContext(CartContext);
 
   useEffect(() => {
     getProfile(`${BaseUrl}profile`, token);
   }, []);
-
+  console.log(cart)
   return (
     <Container>
       <Header text={"Meu carrinho"} />
