@@ -76,7 +76,7 @@ export const RestaurantScreen = () => {
   };
 
   const onChangeQuant = (event) => {
-    setQuantity(event.target.value);
+    setQuantity(Number(event.target.value));
   };
 
   const mainCourse = detail?.products?.filter((i) => {
