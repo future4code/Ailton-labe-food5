@@ -46,6 +46,7 @@ export const AddressTitleStyle = styled.p`
 
 export const DivHistoryTitle = styled.div`
 padding: 16px;
+padding-bottom: 0px;
 width: 100%;
 display: flex;
 flex-direction: column;
@@ -57,9 +58,9 @@ height: 1px;
 background-color: black;
 `
 export const DivHistoryCard = styled.div`
+width: 100%;
 display: flex;
 flex-direction: column;
-width: fit-content;
 margin: 0 auto;
 align-items: center;
 >img {
@@ -73,6 +74,31 @@ export const DivEmpty = styled.div`
   align-items: center;
 `;
 
-export const CardHistory = styled.div `
+export const CardHistory = styled.div`
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  border: 1px solid #b8b8b8;
+  border-radius: 8px;
+`;
+export const TitleOrder = styled.p`
+  color: #5cb646;
+`;
 
+export const OrderDate = styled.p `
+
+`
+export const DivCard = styled.div`
+width: 100%;
+padding: 16px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+`
+export const PSubTotal = styled.p `
+font-weight: bold;
 `
