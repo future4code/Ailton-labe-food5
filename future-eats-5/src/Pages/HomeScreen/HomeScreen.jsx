@@ -10,6 +10,7 @@ import {
   ContainerCategory,
   ContainerRestaurant,
   ContainerRedirect,
+  Container,
   OrderContainer,
   OrderText,
   Icon,
@@ -105,7 +106,7 @@ export const HomeScreen = () => {
   }, []);
 
   return (
-    <div>
+    <Container>
       <Header text={"FutureEats"} />
       {order && (
         <OrderContainer>
@@ -157,6 +158,6 @@ export const HomeScreen = () => {
         </ContainerRedirect>
       )}
       <Footer active={"home"} />
-    </div>
+    </Container>
   );
 };

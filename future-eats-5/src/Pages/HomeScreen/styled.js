@@ -1,17 +1,27 @@
 import styled from "styled-components";
 
-export const ContainerLupe = styled.div`
-  width: 360px;
-  margin: 8px auto;
-  display: flex;
-  justify-content: center;
-  label {
-    position: relative;
-    input {
-      width: 328px;
-      padding: 10px 10px 10px 30px;
-      outline: none;
-      border: 1px solid #b8b8b8;
+export const Container = styled.div`
+margin-bottom: 57px;
+`
+
+export const ContainerLupe = styled.div `
+    width: 360px;
+    margin: 8px auto;
+    display: flex;
+    justify-content: center;
+    label {
+        position: relative;
+        input {
+            width: 328px;
+            padding: 10px 10px 10px 30px;
+            outline: none;
+            border: 1px solid #b8b8b8;
+        }
+        img {
+            position: absolute;
+            top: 8px;
+            left: 3px;
+        }
     }
     img {
       position: absolute;
