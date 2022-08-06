@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+margin-bottom: 57px;
+`
+
 export const ContainerLupe = styled.div `
     width: 360px;
     margin: 8px auto;

@@ -10,6 +10,7 @@ import {
   ContainerCategory,
   ContainerRestaurant,
   ContainerRedirect,
+  Container,
 } from "./styled";
 import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
@@ -98,7 +99,7 @@ export const HomeScreen = () => {
   }, []);
 
   return (
-    <div>
+    <Container>
       <Header text={"FutureEats"} />
       {addressToken && (
         <ContainerLupe>
@@ -140,6 +141,6 @@ export const HomeScreen = () => {
         </ContainerRedirect>
       )}
       <Footer active={"home"} />
-    </div>
+    </Container>
   );
 };
