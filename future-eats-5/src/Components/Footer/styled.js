@@ -7,7 +7,7 @@ export const ContainerFooter = styled.footer `
     justify-content: space-around;
     align-items: center;
     border-top: 1px solid lightgray;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     background-color: #fff;
     .icon {
