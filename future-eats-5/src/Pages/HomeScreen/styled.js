@@ -28,7 +28,6 @@ export const ContainerLupe = styled.div `
       top: 8px;
       left: 3px;
     }
-  }
 `;
 
 export const ContainerCategory = styled.div`

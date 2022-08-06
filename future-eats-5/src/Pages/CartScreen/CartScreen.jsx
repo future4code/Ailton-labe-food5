@@ -54,6 +54,7 @@ export const CartScreen = () => {
   });
 
   const { postOrder, getActiveOrder } = useOrders(form);
+
   useEffect(() => {
     getProfile(`${BaseUrl}profile`, token);
   }, []);
@@ -77,10 +78,14 @@ export const CartScreen = () => {
         <div>Carrinho Vazio</div>
       )}
       <DivValue>
-        <Shipping>Frete</Shipping>
+        {cartObject !== null && cartObject !== undefined && cartObject.length > 0 &&
+        <Shipping>{"Frete R$"+ localObject.shipping}</Shipping>
+        }
         <DivSubTotal>
           <PSubTotal>SUBTOTAL</PSubTotal>
-          <ValueTotal>{`R$${sum}`}</ValueTotal>
+          {!sum ? <ValueTotal>{`R$0`}</ValueTotal>:
+          <ValueTotal>{`R$${(sum+localObject.shipping).toString().replace(".",",")}`}</ValueTotal>
+          } 
         </DivSubTotal>
       </DivValue>
       <Form onSubmit={(e) => e.preventDefault()}>

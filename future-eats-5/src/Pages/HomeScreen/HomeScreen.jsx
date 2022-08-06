@@ -22,11 +22,12 @@ import { Header } from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import { useOrders } from "../../Hooks/useOrders";
 import Clock from "../../Assets/clock.png"
+import { Loading } from "../../Components/Loading/Loading";
 
 export const HomeScreen = () => {
   const token = localStorage.getItem("token");
   const addressToken = localStorage.getItem("addressToken");
-  const { data, getRestaurant } = useRequestData(
+  const { data, getRestaurant, loading } = useRequestData(
     `${BaseUrl}restaurants`,
     addressToken
   );
@@ -117,7 +118,7 @@ export const HomeScreen = () => {
             <OrderText fontWeigth="bolder">SUBTOTAL R${order?.totalPrice}</OrderText>
           </div>
         </OrderContainer>
-      )}
+      )}      
       {addressToken && (
         <ContainerLupe>
           <label>
@@ -143,6 +144,9 @@ export const HomeScreen = () => {
           })}
         </ContainerCategory>
       )}
+      {loading &&
+      <Loading/>
+      }
       {!searching && <ContainerRestaurants>{restaurants}</ContainerRestaurants>}
       {searching && (
         <ContainerRestaurants>{categoryRestaurants}</ContainerRestaurants>
