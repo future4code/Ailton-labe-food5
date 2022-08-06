@@ -27,6 +27,7 @@ import { useForm } from "../../Hooks/useForm";
 import { Form } from "../LoginScreen/styled";
 import ProductList from "../../Components/ProductList/ProductList";
 import { Button } from "../../Components/Button";
+import { useOrders } from "../../Hooks/useOrders";
 
 export const CartScreen = () => {
   useProtectedPage();
@@ -36,15 +37,21 @@ export const CartScreen = () => {
   const cartObject = JSON.parse(cartString);
   const localString = localStorage.getItem("restaurantDetail");
   const localObject = JSON.parse(localString);
-  const { form, onChange, onChangeRadio, cleanFields } = useForm({
-    products: [{ id: "", quantity: 0 }],
+  const cartMap = cartObject?.map(({price, quantity})=>{
+    return Number(price)*Number(quantity)
+  })
+  const sum = cartMap?.reduce((previousValue, currentValue)=>{
+    return previousValue + currentValue
+  }, 0)
+
+  const { form, onChangeRadio } = useForm({
+    products: cartMap,
     paymentMethod: "",
   });
-
+  const { postOrder, getActiveOrder } = useOrders(form);
   useEffect(() => {
     getProfile(`${BaseUrl}profile`, token);
   }, []);
-
   return (
     <Container>
       <Header text={"Meu carrinho"} />
@@ -62,17 +69,19 @@ export const CartScreen = () => {
           <ProductList array={cartObject}></ProductList>
         </>
       ) : (
-        <div>tem nada aqui nao</div>
+        <div>Carrinho Vazio</div>
       )}
 
       <DivValue>
         <Shipping>Frete</Shipping>
         <DivSubTotal>
           <PSubTotal>SUBTOTAL</PSubTotal>
-          <ValueTotal>soma</ValueTotal>
+          <ValueTotal>
+            {`R$${sum}`}
+          </ValueTotal>
         </DivSubTotal>
       </DivValue>
-      <Form>
+      <Form onSubmit={(e) => e.preventDefault()}>
         <DivPayment>
           <PayTitle>Forma de pagamento</PayTitle>
           <StyleLine></StyleLine>
@@ -95,8 +104,9 @@ export const CartScreen = () => {
             <Label>Cartão de crédito</Label>
           </DivInput>
         </DivPayment>
-        {console.log(form)}
-        <Button>Confirmar</Button>
+        <Button onClick={() => postOrder(cartObject[0].restaurantId)}>
+          Confirmar
+        </Button>
       </Form>
       <Footer active={"cart"} />
     </Container>

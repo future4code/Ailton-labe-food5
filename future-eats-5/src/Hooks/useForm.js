@@ -6,15 +6,11 @@ export const useForm = (initialState) => {
     const onChange = (event) => {
         const { name, value } = event.target;
         setForm({...form, [name]: value});
-        console.log(event.target.value)
     }
-
 
     const onChangeRadio = (event) => {
         const { name, value } = event.target;
         setForm({ ...form, [name]: value });
-        console.log(initialState)
-
     }
 
     const cleanFields = () => {

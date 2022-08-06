@@ -52,7 +52,8 @@ export const RestaurantScreen = () => {
     name,
     photoUrl,
     price,
-    restaurantNameProp
+    restaurantNameProp,
+    restaurantId
   ) => {
     if (
       restaurantLocalStorage === null ||
@@ -67,6 +68,7 @@ export const RestaurantScreen = () => {
         photoUrl: photoUrl,
         price: Number(price),
         restaurantName: restaurantNameProp,
+        restaurantId: restaurantId
       });
     } else {
       alert("Ele nao deixa");
@@ -134,6 +136,7 @@ export const RestaurantScreen = () => {
             showPopUp={showPopUp}
             array={mainCourse}
             restaurantName={detail.name}
+            restaurantId={detail.id}
           />
         </div>
         {entry?.length !== 0 && (
@@ -145,6 +148,7 @@ export const RestaurantScreen = () => {
               showPopUp={showPopUp}
               array={entry}
               restaurantName={detail.name}
+              restaurantId={detail.id}
             />
           </div>
         )}
@@ -157,6 +161,7 @@ export const RestaurantScreen = () => {
               showPopUp={showPopUp}
               array={drink}
               restaurantName={detail.name}
+              restaurantId={detail.id}
             />
           </div>
         )}

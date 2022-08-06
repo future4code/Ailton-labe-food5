@@ -13,7 +13,7 @@ import {
   RemoveBtn,
 } from "./styled";
 
-const ProductList = ({ array, showPopUp, restaurantName }) => {
+const ProductList = ({ array, showPopUp, restaurantName, restaurantId }) => {
   const cartString = localStorage.getItem("cart")
   const cart = JSON.parse(cartString)
   const { setCart } = useContext(CartContext);
@@ -63,7 +63,7 @@ const ProductList = ({ array, showPopUp, restaurantName }) => {
                   <AddButton
                     color={"#5cb646"}
                     onClick={() =>
-                      showPopUp(description, id, name, photoUrl, price, restaurantName)
+                      showPopUp(description, id, name, photoUrl, price, restaurantName, restaurantId)
                     }
                   >
                     adicionar
