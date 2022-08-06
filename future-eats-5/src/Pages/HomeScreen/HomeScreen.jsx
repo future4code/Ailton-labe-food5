@@ -10,12 +10,17 @@ import {
   ContainerCategory,
   ContainerRestaurant,
   ContainerRedirect,
+  OrderContainer,
+  OrderText,
+  Icon,
 } from "./styled";
 import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../Components/Button";
 import { Header } from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
+import { useOrders } from "../../Hooks/useOrders";
+import Clock from "../../Assets/clock.png"
 
 export const HomeScreen = () => {
   const token = localStorage.getItem("token");
@@ -40,6 +45,7 @@ export const HomeScreen = () => {
     });
     setArray(filteredRestaurants);
   };
+  const { order, getActiveOrder } = useOrders();
 
   const categoryRestaurants = array
     .filter((filteredRestaurant) => {
@@ -95,15 +101,26 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     getRestaurant();
+    getActiveOrder();
   }, []);
 
   return (
     <div>
       <Header text={"FutureEats"} />
+      {order && (
+        <OrderContainer>
+          <Icon src={Clock}/>
+          <div>
+            <OrderText color="#fff">Pedido em andamento</OrderText>
+            <OrderText color="#000">{order?.restaurantName}</OrderText>
+            <OrderText fontWeigth="bolder">SUBTOTAL R${order?.totalPrice}</OrderText>
+          </div>
+        </OrderContainer>
+      )}
       {addressToken && (
         <ContainerLupe>
           <label>
-            <img src={lupaicon} />
+            <Icon src={lupaicon} />
             <input
               name={"search"}
               placeholder="Restaurante"

@@ -19,6 +19,7 @@ import {
   InputStyle,
   Label,
   DivInput,
+  Positioner,
 } from "./styled";
 import { useProfile } from "../../Hooks/useProfile";
 import { BaseUrl } from "../../Constants/BaseUrl";
@@ -37,17 +38,21 @@ export const CartScreen = () => {
   const cartObject = JSON.parse(cartString);
   const localString = localStorage.getItem("restaurantDetail");
   const localObject = JSON.parse(localString);
-  const cartMap = cartObject?.map(({price, quantity})=>{
-    return Number(price)*Number(quantity)
-  })
-  const sum = cartMap?.reduce((previousValue, currentValue)=>{
-    return previousValue + currentValue
-  }, 0)
+  const cartMap = cartObject?.map(({ price, quantity }) => {
+    return Number(price) * Number(quantity);
+  });
+  const cartMapOfProducts = cartObject?.map(({ id, quantity }) => {
+    return {id, quantity}
+  });
+  const sum = cartMap?.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue;
+  }, 0);
 
   const { form, onChangeRadio } = useForm({
-    products: cartMap,
+    products: cartMapOfProducts,
     paymentMethod: "",
   });
+
   const { postOrder, getActiveOrder } = useOrders(form);
   useEffect(() => {
     getProfile(`${BaseUrl}profile`, token);
@@ -71,14 +76,11 @@ export const CartScreen = () => {
       ) : (
         <div>Carrinho Vazio</div>
       )}
-
       <DivValue>
         <Shipping>Frete</Shipping>
         <DivSubTotal>
           <PSubTotal>SUBTOTAL</PSubTotal>
-          <ValueTotal>
-            {`R$${sum}`}
-          </ValueTotal>
+          <ValueTotal>{`R$${sum}`}</ValueTotal>
         </DivSubTotal>
       </DivValue>
       <Form onSubmit={(e) => e.preventDefault()}>
