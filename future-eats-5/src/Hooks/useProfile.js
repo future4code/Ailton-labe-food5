@@ -38,12 +38,13 @@ export const useProfile = () => {
   };
 
   const getOrdersHistory = async (url, token) => {
-    try {
-      const response = await axios.get(url, { headers: { auth: token } });
-      setOrdersHistory(response.data)
-    } catch (error) {
-      console.log(error);
-      window.alert("Erro na Requisição 3");
+    if (token !== null) {
+      try {
+        const response = await axios.get(url, { headers: { auth: token } });
+        setOrdersHistory(response.data)
+      } catch (error) {
+        console.log(error);
+      }      
     }
   }
 

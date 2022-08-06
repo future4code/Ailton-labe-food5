@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../Components/Button";
 import { Header } from "../../Components/Header/Header";
 import { Input } from "../../Components/Input/Input";
@@ -22,7 +22,7 @@ export const AdressScreen = () => {
     state: "",
     complement: "",
   });
-  useState(()=>{
+  useEffect(()=>{
     if (addressToken !== null) {
       getAddress(`${BaseUrl}profile/address`, addressToken, setForm)
     }
