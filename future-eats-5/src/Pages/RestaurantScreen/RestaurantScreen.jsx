@@ -20,9 +20,11 @@ import {
 } from "./styled";
 import ProductList from "../../Components/ProductList/ProductList";
 import { Header } from "../../Components/Header/Header";
+import { Loading } from "../../Components/Loading/Loading";
 
 export const RestaurantScreen = () => {
   useProtectedPage();
+  const [loading, setLoading] = useState(true)
   const pathParams = useParams();
   const addressToken = localStorage.getItem("addressToken");
   const [detail, setDetail] = useState([]);
@@ -40,9 +42,11 @@ export const RestaurantScreen = () => {
       })
       .then((res) => {
         setDetail(res.data.restaurant);
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false)
       });
   }, []);
 
@@ -119,6 +123,7 @@ export const RestaurantScreen = () => {
         </DivPopUp>
       )}
       <Header text={detail.name} arrow={true} />
+      {!loading ?      
       <RestaurantContainer>
         <RestaurantImg src={detail.logoUrl} alt="logo" />
         <p id="title">{detail.name}</p>
@@ -166,6 +171,8 @@ export const RestaurantScreen = () => {
           </div>
         )}
       </RestaurantContainer>
+      : 
+      <Loading/>}
     </RestaurantCard>
   );
 };
