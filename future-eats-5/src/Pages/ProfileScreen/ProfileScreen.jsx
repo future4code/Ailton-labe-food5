@@ -9,6 +9,10 @@ import {
   ImgStyle,
   AddressTitleStyle,
   DivHistoryTitle,
+  OrderDate,
+  TitleOrder,
+  PSubTotal,
+  DivCard,
   Line,
   CardHistory,
   DivHistoryCard,
@@ -33,6 +37,9 @@ export const ProfileScreen = () => {
     getProfile(`${BaseUrl}profile`, token);
     getOrdersHistory(`${BaseUrl}orders/history`, addressToken);
   }, []);
+
+  console.log(ordersHistory)
+
   return (
     <Container>
       <Header text={"Meu Perfil"} arrow={false} />
@@ -57,16 +64,29 @@ export const ProfileScreen = () => {
         <Line />
       </DivHistoryTitle>
       <DivHistoryCard>
+      
         {ordersHistory?.orders.length === 0 ? (
           <>
             <img src={EmptyHistory} />
             <p>Sem pedidos anteriores!</p>
           </>
         ) : (
-          <CardHistory></CardHistory>
+          <DivCard>
+            {ordersHistory?.orders.map((data, index) => {
+              return (
+                <CardHistory>
+                  <TitleOrder>{data.restaurantName}</TitleOrder>
+                  <OrderDate>{data.createdAt}</OrderDate>
+                  <PSubTotal>
+                    SUBTOTAL R$ {data.totalPrice.toString().replace(".", ",")}
+                  </PSubTotal>
+                </CardHistory>
+              );
+            })}
+          </DivCard>
         )}
       </DivHistoryCard>
-      <Footer active={"profile"}/>
+      <Footer active={"profile"} />
     </Container>
   );
 };
