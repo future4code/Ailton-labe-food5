@@ -7,9 +7,9 @@ export const ContainerFooter = styled.footer `
     justify-content: space-around;
     align-items: center;
     border-top: 1px solid lightgray;
-    position: fixed;
     bottom: 0;
     background-color: #fff;
+    position: fixed;
     .icon {
         font-size: 25px;
         color: #B8B8B8;
