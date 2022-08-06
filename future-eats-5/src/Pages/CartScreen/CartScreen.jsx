@@ -29,6 +29,7 @@ import { Form } from "../LoginScreen/styled";
 import ProductList from "../../Components/ProductList/ProductList";
 import { Button } from "../../Components/Button";
 import { useOrders } from "../../Hooks/useOrders";
+import { CartContext } from "../../Global/context";
 
 export const CartScreen = () => {
   useProtectedPage();
@@ -47,6 +48,8 @@ export const CartScreen = () => {
   const sum = cartMap?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue;
   }, 0);
+
+  const {setCart} = useContext(CartContext)
 
   const { form, onChangeRadio } = useForm({
     products: cartMapOfProducts,
@@ -111,7 +114,7 @@ export const CartScreen = () => {
             <Label>Cartão de crédito</Label>
           </DivInput>
         </DivPayment>
-        <Button onClick={() => postOrder(cartObject[0].restaurantId)}>
+        <Button onClick={() => postOrder(cartObject[0].restaurantId, setCart)}>
           Confirmar
         </Button>
       </Form>

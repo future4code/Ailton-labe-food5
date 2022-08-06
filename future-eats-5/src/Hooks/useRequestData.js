@@ -20,7 +20,7 @@ export const useRequestData = (url, token) => {
     }
   });
 
-  return {loading, getRestaurant, data};
+  return {loading, setLoading, getRestaurant, data};
 };
 
 

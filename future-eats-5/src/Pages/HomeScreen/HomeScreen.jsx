@@ -15,19 +15,23 @@ import {
   OrderText,
   Icon,
 } from "./styled";
+import Clock from "../../Assets/clock.png"
+import Footer from "../../Components/Footer/Footer";
 import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../Components/Button";
 import { Header } from "../../Components/Header/Header";
-import Footer from "../../Components/Footer/Footer";
 import { useOrders } from "../../Hooks/useOrders";
-import Clock from "../../Assets/clock.png"
 import { Loading } from "../../Components/Loading/Loading";
+import { useProtectedPage } from "../../Hooks/useProtectedPage";
+import { useAddress } from "../../Hooks/useAddress";
 
 export const HomeScreen = () => {
   const token = localStorage.getItem("token");
+  useProtectedPage()
+  const {getFullAddress, address} = useAddress()
   const addressToken = localStorage.getItem("addressToken");
-  const { data, getRestaurant, loading } = useRequestData(
+  const { data, getRestaurant, loading, setLoading } = useRequestData(
     `${BaseUrl}restaurants`,
     addressToken
   );
@@ -100,6 +104,13 @@ export const HomeScreen = () => {
         </ContainerRestaurant>
       );
     });
+  
+  useEffect(()=>{
+    if (addressToken === null) {
+      getFullAddress(`${BaseUrl}profile/address`, token, setLoading, address)
+    }
+    getRestaurant()
+  }, [address])
 
   useEffect(() => {
     getRestaurant();
