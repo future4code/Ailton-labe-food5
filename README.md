@@ -48,6 +48,45 @@
 - [X] Editar endereço 
 - [X] Vizualizar Historico de pedido
 
+<<<<<<< HEAD
 <hr/>
 
 <h3>Como rodar localmente</h3>
+=======
+<h3>Como rodar localmente</h3>
+
+<hr/>
+
+Siga o passo-a-passo abaixo:
+
+| Passo | Comando |
+| --------------- | --------------- |
+| Faça o Clone | git clone |
+| Instale as Dependências | npm install |
+| Utilize o Script Start | npm start |
+
+<h3>Bibliotecas Utilizadas</h3>
+
+<hr/>
+
+<li>Axios</li>
+<li>Styled-components</li>
+<li>React router</li>
+<li>React toastify</li>
+
+<h3>Tecnologias Utilizadas</h3>
+
+<hr/>
+
+<li>React</li>
+<li>Css</li>
+<li>HTML</li>
+<li>Javascript</li>
+<li>Restful API</li>
+
+<h3>Imagens</h3>
+
+<hr/>
+
+<img width="100" height="400" src="https://github.com/future4code/Ailton-labe-food5/blob/master/future-eats-5/src/Assets/logofutureeats.png">
+>>>>>>> 68b1dbf64cce8d478068a521b783eec0a7ce0051
