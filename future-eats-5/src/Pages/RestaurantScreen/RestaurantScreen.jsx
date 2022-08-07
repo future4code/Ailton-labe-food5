@@ -21,9 +21,18 @@ import {
 import ProductList from "../../Components/ProductList/ProductList";
 import { Header } from "../../Components/Header/Header";
 import { Loading } from "../../Components/Loading/Loading";
+import { toast } from "react-toastify";
 
 export const RestaurantScreen = () => {
   useProtectedPage();
+  const errorNotification = (message) => {
+    toast.error(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+      });
+  }
   const [loading, setLoading] = useState(true)
   const pathParams = useParams();
   const addressToken = localStorage.getItem("addressToken");
@@ -75,7 +84,7 @@ export const RestaurantScreen = () => {
         restaurantId: restaurantId
       });
     } else {
-      console.log("Ele nao deixa");
+      errorNotification('Você pode fazer pedidos de apenas um restaurante por vez')
     }
   };
 

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ProductContainer = styled.div`
   position: relative;
   display: flex;
-  width: 96%;
+  width: 100%;
   height: 112px;
   border-radius: 8px;
   margin: 8px 0px;
@@ -29,6 +29,7 @@ export const ButtonPrice = styled.div`
 
 export const Price = styled.p`
   font-size: 14px;
+  font-weight: 600;
   position: absolute;
   bottom: 15px;
   color: black;
@@ -67,6 +68,7 @@ color: #5cb646;
 
 export const Description = styled.p`
 font-size: 12px;
+color: #b8b8b8;
 `
 
 export const QuantityContainer = styled.div`

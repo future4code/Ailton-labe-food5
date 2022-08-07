@@ -6,8 +6,8 @@ export const RestaurantCard = styled.div`
   overflow: hidden;
 `;
 export const RestaurantContainer = styled.div`
-  margin-left: 17px;
-  margin-right: 16px;
+  width: 100%;
+  padding: 16px;
   color: #b8b8b8;
   font-family: "Roboto";
   #title {
@@ -20,11 +20,10 @@ export const RestaurantContainer = styled.div`
 `;
 
 export const RestaurantImg = styled.img`
-  width: 328px;
+  width: 100%;
   height: 120px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  //margin: 17px 16px 12px;
   object-fit: cover;
 `;
 export const ProductContainer = styled.div`
@@ -94,6 +93,7 @@ export const BorderTitle = styled.div`
   border-bottom: 1px solid black;
   > p {
     color: black;
+    font-weight: 500;
     font-size: 18px;
     //font-weight: bold;
     padding-bottom: 4px;
@@ -110,12 +110,12 @@ export const DivPopUp = styled.div`
   justify-content: center;
   overflow: auto;
 `;
-export const PopUpStyle = styled.div`
- 
+export const PopUpStyle = styled.div` 
   width: 328px;
+  background-color: #fff;
   height: 216px;
-  background-color: white;
   padding: 0px 16px;
+  z-index: 2;
 `;
 
 export const TitleStyle = styled.p`

@@ -1,8 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const useProfile = () => {
+  const errorNotification = (message) => {
+    toast.error(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+      });
+  }
+
+  const successNotification = (message) => {
+    toast.success(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+      });
+  }
+
   const navigate = useNavigate()
   const [profileInfo, setProfileInfo] = useState({
     name: "",
@@ -21,7 +40,7 @@ export const useProfile = () => {
         cpf: response.data.user.cpf
       })
     } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification(error.response.data.message)
     }
   };
 
@@ -29,9 +48,8 @@ export const useProfile = () => {
     try {
       const response = await axios.get(url, { headers: { auth: token } });
       setProfileInfo(response.data);
-
     } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification(error.response.data.message)
     }
   };
 
@@ -41,7 +59,7 @@ export const useProfile = () => {
         const response = await axios.get(url, { headers: { auth: token } });
         setOrdersHistory(response.data)
       } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification(error.response.data.message)
       }      
     }
   }
@@ -50,10 +68,10 @@ export const useProfile = () => {
     event.preventDefault()
     try {
       const response = await axios.put(url, body, {headers: {auth: token}})
-      window.alert("Cadastro atualizado!")
+      successNotification("Cadastro atualizado!")
       navigate(-1)
     } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification(error.response.data.message)
     }
   }
 
