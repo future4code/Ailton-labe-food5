@@ -39,6 +39,19 @@ const ProductList = ({ array, showPopUp, restaurantName, restaurantId }) => {
   return (
     <>
       {array?.map(({ description, id, name, photoUrl, price }) => {
+        const priceString = price.toString()
+        const priceFormated = priceString.split(".")
+        let priceFirstPart = priceFormated[0]        
+        let priceSecondPart = priceFormated[1]
+        if (priceSecondPart?.length === 1) {
+          priceSecondPart = priceSecondPart + "0"
+        } else {
+          if (priceSecondPart === undefined) {
+            priceSecondPart = "00"
+          } else {
+            priceSecondPart = priceSecondPart.slice(0,2)
+          }  
+        }
         const indexOfItem = cartMap?.indexOf(id);
         const isInCart = cartMap?.some((data) => {
           return data === id;
@@ -58,7 +71,7 @@ const ProductList = ({ array, showPopUp, restaurantName, restaurantId }) => {
                 </QuantityContainer>
               )}
               <ButtonPrice>
-                <Price>R${price}</Price>
+                <Price>R${priceFirstPart+","+priceSecondPart}</Price>
                 {!isInCart ? (
                   <AddButton
                     color={"#5cb646"}

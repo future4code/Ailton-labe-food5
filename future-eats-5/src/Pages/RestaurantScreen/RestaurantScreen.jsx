@@ -75,7 +75,7 @@ export const RestaurantScreen = () => {
         restaurantId: restaurantId
       });
     } else {
-      alert("Ele nao deixa");
+      console.log("Ele nao deixa");
     }
   };
 

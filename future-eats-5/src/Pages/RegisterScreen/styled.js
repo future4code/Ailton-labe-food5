@@ -50,7 +50,7 @@ max-width: 480px;
 height: 60px;
 position: relative;
 display: flex;
-align-items: center
+align-items: center;
 `
 
 export const EyeImage = styled.img`
@@ -58,4 +58,16 @@ width: 24px;
 height: 24px;
 position: absolute;
 right: 5%;
+`
+export const ErrorMessage = styled.p`
+color: #e02020;
+font-size: 12px;
+position: absolute;
+bottom: -20px;
+left: 15px;
+`
+
+export const ErrorSeparator = styled.div`
+width: 100%;
+height: 1px;
 `

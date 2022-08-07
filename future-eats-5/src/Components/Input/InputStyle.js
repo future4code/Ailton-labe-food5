@@ -9,27 +9,30 @@ export const Container = styled.div`
   transition: 1s ease-in-out;
   max-width: 480px;
   > input {
-    border: 1px solid #d0d0d0;
+    border: 1px solid ${(props) => props.color};
     padding: 16px;
     width: 100%;
     max-width: 480px;
     height: 60px;
     outline: 0;
-    :focus ~ label {
+    :focus ~ Label {
       transition: 0.25s ease;
-      transform: translateY(-20px);
-      font-size: 0.7rem;
+      transform: translateY(-30px);
     }
-    :valid ~ label {
-      transform: translateY(-20px);
-      font-size: 0.7rem;
+    :valid ~ Label {
+      transform: translateY(-30px);
     }
   }
-  > label {
-    color: #d0d0d0;
-    font-size: 1rem;
-    position: absolute;
-    left: 16px;
-    bottom: 20px;
-  }
+`;
+
+export const Label = styled.label`
+  background-color: #fff;
+  border-radius: 8px;
+  color: ${(props) => props.color};
+  font-size: 1rem;
+  position: absolute;
+  left: 16px;
+  bottom: 20px;
+  padding-left: 4px;
+  padding-right: 20px;
 `;

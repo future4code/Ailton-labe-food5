@@ -23,7 +23,7 @@ import { useProfile } from "../../Hooks/useProfile";
 import { BaseUrl } from "../../Constants/BaseUrl";
 import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../Components/Footer/Footer"
+import Footer from "../../Components/Footer/Footer";
 
 export const ProfileScreen = () => {
   useProtectedPage();
@@ -37,8 +37,6 @@ export const ProfileScreen = () => {
     getProfile(`${BaseUrl}profile`, token);
     getOrdersHistory(`${BaseUrl}orders/history`, addressToken);
   }, []);
-
-  console.log(ordersHistory)
 
   return (
     <Container>
@@ -64,7 +62,6 @@ export const ProfileScreen = () => {
         <Line />
       </DivHistoryTitle>
       <DivHistoryCard>
-      
         {ordersHistory?.orders.length === 0 ? (
           <>
             <img src={EmptyHistory} />
@@ -73,12 +70,65 @@ export const ProfileScreen = () => {
         ) : (
           <DivCard>
             {ordersHistory?.orders.map((data, index) => {
+              const dateFormated = Date(data.createdAt).split(" ");
+              const priceFormated = data.totalPrice.toString().replace(".", ",").split(",")
+              let price = "";
+              if (priceFormated[1]?.length === 1) {
+                price = priceFormated[1] + "0"
+              } else {
+                if (priceFormated[1] === undefined) {
+                  price = "00"
+                } else {
+                  price = priceFormated[1].slice(0,2)
+                }  
+              }
+
+              let month = "";
+              switch (dateFormated[1]) {
+                case "Jan":
+                  month = "Janeiro";
+                  break;
+                case "Feb":
+                  month = "Fevereiro";
+                  break;
+                case "Mar":
+                  month = "Março";
+                  break;
+                case "Apr":
+                  month = "Abril";
+                  break;
+                case "May":
+                  month = "Maio";
+                  break;
+                case "Jun":
+                  month = "Junho";
+                  break;
+                case "Jul":
+                  month = "Julho";
+                  break;
+                case "Aug":
+                  month = "Agosto";
+                  break;
+                case "Sep":
+                  month = "Setembro";
+                  break;
+                case "Oct":
+                  month = "Outubro";
+                  break;
+                case "Nov":
+                  month = "Novembro";
+                  break;
+                case "Dec":
+                  month = "Dezembro";
+                  break;
+              }
+
               return (
-                <CardHistory>
+                <CardHistory key={index}>
                   <TitleOrder>{data.restaurantName}</TitleOrder>
-                  <OrderDate>{data.createdAt}</OrderDate>
+                  <OrderDate>{`${dateFormated[2]} ${month.toLowerCase()} ${dateFormated[3]}`}</OrderDate>
                   <PSubTotal>
-                    SUBTOTAL R$ {data.totalPrice.toString().replace(".", ",")}
+                    SUBTOTAL R${priceFormated[0]+ "," + price}
                   </PSubTotal>
                 </CardHistory>
               );

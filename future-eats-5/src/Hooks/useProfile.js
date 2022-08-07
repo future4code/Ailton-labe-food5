@@ -21,8 +21,7 @@ export const useProfile = () => {
         cpf: response.data.user.cpf
       })
     } catch (error) {
-      console.log(error);
-      window.alert("Erro na Requisição 1");
+      console.log(error.response.data.message)
     }
   };
 
@@ -32,8 +31,7 @@ export const useProfile = () => {
       setProfileInfo(response.data);
 
     } catch (error) {
-      console.log(error);
-      window.alert("Erro na Requisição 1");
+      console.log(error.response.data.message)
     }
   };
 
@@ -43,7 +41,7 @@ export const useProfile = () => {
         const response = await axios.get(url, { headers: { auth: token } });
         setOrdersHistory(response.data)
       } catch (error) {
-        console.log(error);
+      console.log(error.response.data.message)
       }      
     }
   }
@@ -55,8 +53,7 @@ export const useProfile = () => {
       window.alert("Cadastro atualizado!")
       navigate(-1)
     } catch (error) {
-      console.log(error)
-      window.alert("Erro na requisição put")
+      console.log(error.response.data.message)
     }
   }
 
