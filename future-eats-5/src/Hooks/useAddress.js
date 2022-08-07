@@ -9,7 +9,6 @@ export const useAddress = () => {
   const [address, setAddress] = useState({})
   const addAddress = async (url, body, token, e) => {
     e.preventDefault();
-    console.log(e);
     try {
       const response = await axios.put(url, body, {
         headers: { auth: token },
@@ -17,19 +16,16 @@ export const useAddress = () => {
       localStorage.setItem("addressToken", response.data.token);
       GoTo(navigate, "/home");
     } catch (error) {
-      console.log(error);
-      alert(error.message);
+      console.log(error.response.data.message)
     }
   };
 
   const defineAddress = async(url, body, token) => {
-    // console.log(body)
     try {
       const response = await axios.put( url, body, {headers: {auth: token}} )
       localStorage.setItem("addressToken", response.data.token)
-      console.log(response)
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data.message)
     }
   }
 
@@ -47,18 +43,17 @@ export const useAddress = () => {
         complement: complement,
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
     }
   };
 
   const getFullAddress = async(url, token, setLoading, body) => {
-    console.log(body)
     try {
       const response = await axios.get(url, {headers: {auth: token}})
       setAddress(response.data.address)
       defineAddress(`${BaseUrl}address`, body, token)
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data.message)
       setLoading(false)
     }
   }

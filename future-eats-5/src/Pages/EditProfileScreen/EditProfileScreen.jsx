@@ -30,27 +30,63 @@ export const EditProfileScreen = () => {
       <Form onSubmit={(event)=>updateProfile(`${BaseUrl}profile`, form, addressToken, event)}>
         {profileInfo.user?.name !== undefined && (
           <>
+          {form.name.length === 0 ?
+            <Input
+            name="name"
+            value={form.name}
+            onChange={onChange}
+            required
+            label={"Nome e Sobrenome"}
+            color={"#e02020"}
+            />
+            :
             <Input
               name="name"
               value={form.name}
               onChange={onChange}
               required
               label={"Nome e Sobrenome"}
+              color={"#d0d0d0"}
             />
+          }
+          {form.email.length === 0 ?
+            <Input
+            name="email"
+            value={form.email}
+            onChange={onChange}
+            required
+            label={"E-Mail"}
+            color={"#e02020"}
+            />
+            :
             <Input
               name="email"
               value={form.email}
               onChange={onChange}
               required
-              label={"E-mail"}
+              label={"Email"}
+              color={"#d0d0d0"}
             />
+          }
+          {form.cpf.length === 0 ?
+            <Input
+            name="cpf"
+            value={form.cpf}
+            onChange={onChange}
+            required
+            label={"CPF"}
+            color={"#e02020"}
+            />
+            :
             <Input
               name="cpf"
               value={form.cpf}
               onChange={onChange}
               required
               label={"CPF"}
+              color={"#d0d0d0"}
             />
+          }
             <Button>Salvar</Button>
           </>
         )}

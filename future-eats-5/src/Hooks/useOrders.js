@@ -11,13 +11,12 @@ export const useOrders = (form) => {
   const postOrder = async (id, setCart) => {
     try {
       const response = await axios.post(`${BaseUrl}restaurants/${id}/order`, form, { headers: { auth: token } });
-      console.log(response)
       const emptyCart = []      
       setCart([])
       localStorage.setItem("cart", JSON.stringify(emptyCart));
       GoTo(navigate, "/home");
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message)
     }
   };
   const getActiveOrder = async () => {
@@ -28,8 +27,7 @@ export const useOrders = (form) => {
         });
         setOrder(response.data.order)
       } catch (error) {
-        console.log(error);
-        alert(error.reponse.data.message);
+      console.log(error.response.data.message)
       }
     };
     }

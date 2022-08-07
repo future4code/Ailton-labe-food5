@@ -1,16 +1,17 @@
 import React from "react";
-import { Container } from "./InputStyle";
-export const Input = ({ type, name, value, onChange, label }) => {
+import { Container, Label } from "./InputStyle";
+export const Input = ({ type, name, value, onChange, label, color }) => {
   return (
-    <Container>
+    <Container color={color}>
       <input
         required
         type={type}
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={onChange}        
+        title={"Campo obrigatorio"}
       />
-      <label>{label}</label>
+      <Label color={color}>{label}</Label>
     </Container>
   );
 };

@@ -30,7 +30,7 @@ export const LoginScreen = () => {
       GoTo(navigate, "/home");
       localStorage.setItem("token", response.data.token);
     } catch (error) {
-      window.alert(error.message);
+      console.log(error.response.data.message)
     }
   };
 
@@ -61,6 +61,7 @@ export const LoginScreen = () => {
           onChange={onChange}
           label={"E-mail"}
           pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+          color={"#d0d0d0"}
         />
         <PasswordContainer>
           <Input
@@ -71,6 +72,7 @@ export const LoginScreen = () => {
             pattern="^.{6,}$"
             type={passwordShown ? "text" : "password"}
             label={"Senha"}
+            color={"#d0d0d0"}
           />
           <EyeImage src={EyeHidden} onClick={togglePassword} />
         </PasswordContainer>
