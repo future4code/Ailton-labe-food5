@@ -48,11 +48,8 @@
 - [X] Editar endereço 
 - [X] Vizualizar Historico de pedido
 
-<<<<<<< HEAD
 <hr/>
 
-<h3>Como rodar localmente</h3>
-=======
 <h3>Como rodar localmente</h3>
 
 <hr/>
@@ -88,5 +85,11 @@ Siga o passo-a-passo abaixo:
 
 <hr/>
 
-<img width="100" height="400" src="https://github.com/future4code/Ailton-labe-food5/blob/master/future-eats-5/src/Assets/logofutureeats.png">
->>>>>>> 68b1dbf64cce8d478068a521b783eec0a7ce0051
+<div align="center">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/login.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/cadastro.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/home.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/restaurante.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/carrinho%20e%20finalizacao%20de%20compra.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/perfil%20e%20historico.png">
+</div>
