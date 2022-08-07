@@ -3,9 +3,27 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BaseUrl } from "../Constants/BaseUrl";
 import { GoTo } from "../Functions/GoTo";
+import {toast} from "react-toastify"
 
 export const useAddress = () => {
   const navigate = useNavigate();
+  const errorNotification = (message) => {
+    toast.error(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+      });
+  }
+
+  const successNotification = (message) => {
+    toast.success(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+      });
+  }
   const [address, setAddress] = useState({})
   const addAddress = async (url, body, token, e) => {
     e.preventDefault();
@@ -13,10 +31,11 @@ export const useAddress = () => {
       const response = await axios.put(url, body, {
         headers: { auth: token },
       });
+      successNotification("Endereço cadastrado")
       localStorage.setItem("addressToken", response.data.token);
       GoTo(navigate, "/home");
     } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification(error.response.data.message)
     }
   };
 
@@ -25,7 +44,7 @@ export const useAddress = () => {
       const response = await axios.put( url, body, {headers: {auth: token}} )
       localStorage.setItem("addressToken", response.data.token)
     } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification(error.response.data.message)
     }
   }
 
@@ -43,7 +62,7 @@ export const useAddress = () => {
         complement: complement,
       });
     } catch (error) {
-      console.log(error.response.data.message);
+      errorNotification(error.response.data.message)
     }
   };
 
@@ -53,7 +72,7 @@ export const useAddress = () => {
       setAddress(response.data.address)
       defineAddress(`${BaseUrl}address`, body, token)
     } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification(error.response.data.message)
       setLoading(false)
     }
   }

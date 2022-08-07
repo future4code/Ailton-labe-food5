@@ -20,6 +20,10 @@ import {
   Label,
   DivInput,
   Positioner,
+  ButtonHide,
+  CartIsEmpty,
+  ProductPadding,
+  ProductListPadding,
 } from "./styled";
 import { useProfile } from "../../Hooks/useProfile";
 import { BaseUrl } from "../../Constants/BaseUrl";
@@ -43,20 +47,31 @@ export const CartScreen = () => {
     return Number(price) * Number(quantity);
   });
   const cartMapOfProducts = cartObject?.map(({ id, quantity }) => {
-    return {id, quantity}
+    return { id, quantity };
   });
   const sum = cartMap?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue;
   }, 0);
 
-  const {setCart} = useContext(CartContext)
+  const { setCart } = useContext(CartContext);
 
   const { form, onChangeRadio } = useForm({
     products: cartMapOfProducts,
     paymentMethod: "",
   });
-
+  const totalSum = sum + localObject?.shipping;
+  const sumTreatment = totalSum.toString().split(".");
+  let finalPricePart = sumTreatment[1];
+  if (sumTreatment[1] === undefined) {
+    finalPricePart = "00";
+  } else {
+    finalPricePart = sumTreatment[1].slice(0, 1);
+    if (finalPricePart.length < 2) {
+      finalPricePart = finalPricePart[0] + "0";
+    }
+  }
   const { postOrder, getActiveOrder } = useOrders(form);
+  const formatString = profileInfo.user?.address?.split(",");
 
   useEffect(() => {
     getProfile(`${BaseUrl}profile`, token);
@@ -65,30 +80,49 @@ export const CartScreen = () => {
     <Container>
       <Header text={"Meu carrinho"} />
       <DivAddress>
-        <AddressTitleStyle>Endereço cadastrado</AddressTitleStyle>
-        <PStyle>{profileInfo?.user?.address}</PStyle>
+        <AddressTitleStyle>Endereço de entrega</AddressTitleStyle>
+        {formatString && (
+          <PStyle
+            fontWeigth={"500"}
+            color={"#000"}
+          >{`${formatString[0]},${formatString[1]}`}</PStyle>
+        )}
       </DivAddress>
       {cartObject && cartObject.length !== 0 ? (
         <>
           <DivDetail>
             <RestaurantName>{localObject.name}</RestaurantName>
-            <PStyle>{localObject.address}</PStyle>
-            <PStyle>{localObject.deliveryTime} min</PStyle>
+            <PStyle fontWeigth={"400"} color={"#b8b8b8"}>
+              {localObject.address}
+            </PStyle>
+            <PStyle fontWeigth={"400"} color={"#b8b8b8"}>
+              {localObject.deliveryTime} min
+            </PStyle>
           </DivDetail>
-          <ProductList array={cartObject}></ProductList>
+          <ProductListPadding>
+            <ProductList array={cartObject}></ProductList>
+          </ProductListPadding>
         </>
       ) : (
-        <div>Carrinho Vazio</div>
+        <CartIsEmpty>Carrinho Vazio</CartIsEmpty>
       )}
       <DivValue>
-        {cartObject !== null && cartObject !== undefined && cartObject.length > 0 &&
-        <Shipping>{"Frete R$"+ localObject.shipping}</Shipping>
-        }
+        {cartObject !== null &&
+        cartObject !== undefined &&
+        cartObject.length > 0 ? (
+          <Shipping>{"Frete R$" + localObject?.shipping}</Shipping>
+        ) : (
+          <Shipping>{"Frete R$0,00"}</Shipping>
+        )}
         <DivSubTotal>
           <PSubTotal>SUBTOTAL</PSubTotal>
-          {!sum ? <ValueTotal>{`R$0`}</ValueTotal>:
-          <ValueTotal>{`R$${(sum+localObject.shipping).toString().replace(".",",")}`}</ValueTotal>
-          } 
+          {!sum ? (
+            <ValueTotal>{`R$0`}</ValueTotal>
+          ) : (
+            <ValueTotal>{`R$${
+              sumTreatment[0] + "," + finalPricePart
+            }`}</ValueTotal>
+          )}
         </DivSubTotal>
       </DivValue>
       <Form onSubmit={(e) => e.preventDefault()}>
@@ -114,9 +148,15 @@ export const CartScreen = () => {
             <Label>Cartão de crédito</Label>
           </DivInput>
         </DivPayment>
-        <Button onClick={() => postOrder(cartObject[0].restaurantId, setCart)}>
-          Confirmar
-        </Button>
+        {cartObject.length === 0 || cartObject === null ? (
+          <ButtonHide>Confirmar</ButtonHide>
+        ) : (
+          <Button
+            onClick={() => postOrder(cartObject[0].restaurantId, setCart)}
+          >
+            Confirmar
+          </Button>
+        )}
       </Form>
       <Footer active={"cart"} />
     </Container>

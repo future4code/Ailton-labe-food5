@@ -29,6 +29,10 @@ import { useAddress } from "../../Hooks/useAddress";
 export const HomeScreen = () => {
   const token = localStorage.getItem("token");
   useProtectedPage()
+  if (localStorage.getItem("cart") === null) {
+    const emptyCart = JSON.stringify([])
+    localStorage.setItem("cart", emptyCart)
+  }
   const {getFullAddress, address} = useAddress()
   const addressToken = localStorage.getItem("addressToken");
   const { data, getRestaurant, loading, setLoading } = useRequestData(

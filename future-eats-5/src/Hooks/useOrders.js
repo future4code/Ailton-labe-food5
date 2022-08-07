@@ -3,8 +3,27 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { BaseUrl } from "../Constants/BaseUrl";
 import { GoTo } from "../Functions/GoTo";
+import {toast} from "react-toastify"
 
 export const useOrders = (form) => {
+  const errorNotification = (message) => {
+    toast.error(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+      });
+  }
+
+  const successNotification = (message) => {
+    toast.success(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+      });
+  }
+
   const navigate = useNavigate()
   const [order, setOrder] = useState()
   const token = localStorage.getItem("addressToken");
@@ -16,7 +35,7 @@ export const useOrders = (form) => {
       localStorage.setItem("cart", JSON.stringify(emptyCart));
       GoTo(navigate, "/home");
     } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification('Selecione o método de pagamento')
     }
   };
   const getActiveOrder = async () => {
@@ -27,7 +46,7 @@ export const useOrders = (form) => {
         });
         setOrder(response.data.order)
       } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification(error.response.data.message)
       }
     };
     }

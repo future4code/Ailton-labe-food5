@@ -10,6 +10,7 @@ import { useForm } from "../../Hooks/useForm";
 import { BaseUrl } from "../../Constants/BaseUrl";
 import SplashScreen from "../../Components/SplashScreen/SplashScreen";
 import EyeHidden from "../../Assets/hidden-eye.png"
+import {toast} from 'react-toastify'
 
 export const LoginScreen = () => {
   const { form, onChange, cleanFields } = useForm({ email: "", password: "" });
@@ -24,13 +25,21 @@ export const LoginScreen = () => {
   };
 
   const login = async (event) => {
+    const errorNotification = (message) => {
+      toast.error(message, {
+        position: "bottom-center",
+        autoClose: 4000,
+        hideProgressBar: true,
+        draggable: true,
+        });
+    }
     event.preventDefault();
     try {
       const response = await axios.post(`${BaseUrl}login`, form);
       GoTo(navigate, "/home");
       localStorage.setItem("token", response.data.token);
     } catch (error) {
-      console.log(error.response.data.message)
+      errorNotification(error.response.data.message)
     }
   };
 
@@ -47,7 +56,7 @@ export const LoginScreen = () => {
   }, []);
 
   return (
-    <Container>
+    <Container>      
       {splashScreenShow && <SplashScreen opacity={splashScreenTime} />}
       <DivLogo>
         <LogoStyle src={Logo} />
