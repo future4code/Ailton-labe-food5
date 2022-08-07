@@ -82,3 +82,5 @@ Siga o passo-a-passo abaixo:
 <h3>Imagens</h3>
 
 <hr/>
+
+<img width="100" height="400" src="https://github.com/future4code/Ailton-labe-food5/blob/master/future-eats-5/src/Assets/logofutureeats.png">
