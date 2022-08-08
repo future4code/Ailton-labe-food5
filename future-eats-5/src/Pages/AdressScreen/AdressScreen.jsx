@@ -76,11 +76,10 @@ export const AdressScreen = () => {
           onChange={onChange}
           label={"Número*"}
           color={"#d0d0d0"}
-
         />
         }
         <Input
-          required
+        required={false}
           name="complement"
           value={form.complement}
           onChange={onChange}

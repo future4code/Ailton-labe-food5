@@ -130,7 +130,6 @@ export const ButtonHide = styled.button`
   background-color: rgba(92, 182, 70, 0.5);
   border: none;
   user-select: none;
-  position: absolute;
   bottom: 64px;
 `;
 

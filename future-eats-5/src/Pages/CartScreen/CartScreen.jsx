@@ -70,11 +70,12 @@ export const CartScreen = () => {
       finalPricePart = finalPricePart[0] + "0";
     }
   }
-  const { postOrder, getActiveOrder } = useOrders(form);
+  const { postOrder, getActiveOrder, order } = useOrders(form);
   const formatString = profileInfo.user?.address?.split(",");
 
   useEffect(() => {
     getProfile(`${BaseUrl}profile`, token);
+    getActiveOrder()
   }, []);
   return (
     <Container>
@@ -148,7 +149,10 @@ export const CartScreen = () => {
             <Label>Cartão de crédito</Label>
           </DivInput>
         </DivPayment>
-        {cartObject.length === 0 || cartObject === null ? (
+        {order !== null && order !== undefined &&
+        <p>Você já possuiu um pedido em andamento</p>
+        }
+        {cartObject.length === 0 || cartObject === null || order === undefined || order !== null ? (
           <ButtonHide>Confirmar</ButtonHide>
         ) : (
           <Button
