@@ -136,7 +136,7 @@ export const RegisterScreen = () => {
             color={"#d0d0d0"}
           />
         )}
-        {form.cpf.length < 11 || form.cpf.length > 11 && canShowErrors ? (
+        {(canShowErrors && form.cpf.length < 11) || form.cpf.length > 11 ? (
           <Input
             label={"CPF*"}
             name="cpf"
