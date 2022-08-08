@@ -8,6 +8,7 @@ export const Container = styled.div`
   width: 100%;
   transition: 1s ease-in-out;
   max-width: 480px;
+  user-select: none;
   > input {
     border: 1px solid ${(props) => props.color};
     padding: 16px;
@@ -15,6 +16,7 @@ export const Container = styled.div`
     max-width: 480px;
     height: 60px;
     outline: 0;
+    user-select: none;
     :focus ~ Label {
       transition: 0.25s ease;
       transform: translateY(-30px);
@@ -26,6 +28,7 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label`
+  user-select: none;
   background-color: #fff;
   border-radius: 8px;
   color: ${(props) => props.color};

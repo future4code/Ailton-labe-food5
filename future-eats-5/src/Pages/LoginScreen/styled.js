@@ -17,6 +17,7 @@ export const LogoStyle = styled.img`
 width: 100%;
 `
 export const Title = styled.p`
+  user-select: none;
   font-size: 16px;
   font-family: Roboto;
   font-weight: normal;
@@ -42,9 +43,11 @@ export const Text = styled.p`
   padding-top: 8px;
   font-size: 16px;
   font-family: Roboto;
+  user-select: none;
 `;
 export const A = styled.a`
 cursor: pointer;
+user-select: none;
 `
 
 export const PasswordContainer = styled.div`
