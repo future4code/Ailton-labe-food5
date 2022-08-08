@@ -22,3 +22,9 @@ display: flex;
 justify-content: center;
 align-items: center;
 `
+export const LogoutImage = styled.img`
+  width: 23px;
+  height: 24px;
+  position: absolute;
+  right: 16px;
+`;

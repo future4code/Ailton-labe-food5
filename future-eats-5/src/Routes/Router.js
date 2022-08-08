@@ -7,6 +7,7 @@ import { LoginScreen } from "../Pages/LoginScreen/LoginScreen";
 import { ProfileScreen } from "../Pages/ProfileScreen/ProfileScreen";
 import { RegisterScreen } from "../Pages/RegisterScreen/RegisterScreen";
 import { RestaurantScreen } from "../Pages/RestaurantScreen/RestaurantScreen";
+import { ErrorPage } from "../Pages/ErrorPage/ErrorPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SplashScreen } from "../Pages/SplashScreen/SplashScreen";
 import { CartContext } from "../Global/context";
@@ -40,6 +41,7 @@ export const Router = () => {
             </CartContext.Provider>
           }
         />
+        <Route path="*" element={<ErrorPage/>}/>
       </Routes>
     </BrowserRouter>
   );
