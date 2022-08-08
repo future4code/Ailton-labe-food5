@@ -11,7 +11,7 @@
 <h3 align="center"> Sumário</h3>
   <p align="center">
  <span>|
-    <a href="http://futureeats5.surge.sh/">:mag: Surge</a>
+    <a href="https://future-eats5.surge.sh/">:mag: Surge</a>
     <span>|
     <a href="#funcionalidades">:bulb: Funcionalidades</a>
     <span>|
@@ -30,7 +30,7 @@
 
 <hr/>
 
-<a href="http://futureeats5.surge.sh/">Future Eats</a>
+<a href="https://future-eats5.surge.sh/">Future Eats</a>
 
 <h3> Funcionalidades</h3>
 
