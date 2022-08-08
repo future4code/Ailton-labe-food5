@@ -93,3 +93,14 @@ Siga o passo-a-passo abaixo:
 <img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/carrinho%20e%20finalizacao%20de%20compra.png">
 <img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/perfil%20e%20historico.png">
 </div>
+
+<h3>Desenvolvedores</h3>
+
+<hr/>
+
+<p>Gabriel Theodoro</p>
+<p>João Zang</p>
+<p>Rodrigo Póvoa</p>
+<p>Daniel Andrade</p>
+<p>Joclelson Rodrigues</p>
+<p>Maria Caroline Pereira</p>
