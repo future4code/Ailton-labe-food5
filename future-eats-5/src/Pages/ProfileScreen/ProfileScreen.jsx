@@ -24,6 +24,7 @@ import { BaseUrl } from "../../Constants/BaseUrl";
 import { GoTo } from "../../Functions/GoTo";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
+import { toast } from "react-toastify";
 
 export const ProfileScreen = () => {
   useProtectedPage();
@@ -38,9 +39,28 @@ export const ProfileScreen = () => {
     getOrdersHistory(`${BaseUrl}orders/history`, addressToken);
   }, []);
 
+    const successNotification = () => {
+      toast.success("Você deslogou.", {
+        position: "bottom-center",
+        autoClose: 4000,
+        hideProgressBar: true,
+        draggable: true,
+      });
+    };
+
+  const appLogout = () => {
+    window.localStorage.removeItem("token")
+    window.localStorage.removeItem("addressToken");
+    window.localStorage.removeItem("cart")
+    window.localStorage.removeItem("restaurantDetail");
+    successNotification()
+    GoTo(navigate, "/")
+    
+  }
+
   return (
     <Container>
-      <Header text={"Meu Perfil"} arrow={false} />
+      <Header text={"Meu Perfil"} arrow={false} logout={true} appLogout={appLogout}/>
       <DivEdits>
         <DivProfile>
           <ImgStyle
