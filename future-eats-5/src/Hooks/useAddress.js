@@ -24,6 +24,16 @@ export const useAddress = () => {
       draggable: true,
       });
   }
+
+  const infoNotification = (message) => {
+    toast.info(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+      });
+  }
+
   const [address, setAddress] = useState({})
   const addAddress = async (url, body, token, e) => {
     e.preventDefault();
@@ -31,7 +41,7 @@ export const useAddress = () => {
       const response = await axios.put(url, body, {
         headers: { auth: token },
       });
-      successNotification("Endereço cadastrado")
+      infoNotification("Endereço atualizado")
       localStorage.setItem("addressToken", response.data.token);
       GoTo(navigate, "/home");
     } catch (error) {

@@ -22,6 +22,15 @@ export const useProfile = () => {
       });
   }
 
+  const infoNotification = (message) => {
+    toast.info(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+      });
+  }
+
   const navigate = useNavigate()
   const [profileInfo, setProfileInfo] = useState({
     name: "",
@@ -66,12 +75,17 @@ export const useProfile = () => {
 
   const updateProfile = async (url, body, token, event) => {
     event.preventDefault()
-    try {
-      const response = await axios.put(url, body, {headers: {auth: token}})
-      successNotification("Cadastro atualizado!")
-      navigate(-1)
-    } catch (error) {
-      errorNotification(error.response.data.message)
+    {console.log(body.cpf.length)}
+    if (body.cpf.length > 11 || body.cpf.length < 11) {
+      errorNotification('CPF invalido')
+    } else {
+      try {
+        const response = await axios.put(url, body, {headers: {auth: token}})
+        infoNotification("Cadastro atualizado!")
+        navigate(-1)
+      } catch (error) {
+        errorNotification(error.response.data.message)
+      }
     }
   }
 

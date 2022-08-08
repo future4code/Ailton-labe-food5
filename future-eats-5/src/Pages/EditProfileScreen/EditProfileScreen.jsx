@@ -68,7 +68,7 @@ export const EditProfileScreen = () => {
               color={"#d0d0d0"}
             />
           }
-          {form.cpf.length === 0 ?
+          {form.cpf.length < 11 || form.cpf.length > 11 ?
             <Input
             name="cpf"
             value={form.cpf}

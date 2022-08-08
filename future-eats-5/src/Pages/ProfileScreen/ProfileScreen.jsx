@@ -40,7 +40,7 @@ export const ProfileScreen = () => {
   }, []);
 
     const successNotification = () => {
-      toast.success("Você deslogou.", {
+      toast.info("Você deslogou.", {
         position: "bottom-center",
         autoClose: 4000,
         hideProgressBar: true,
