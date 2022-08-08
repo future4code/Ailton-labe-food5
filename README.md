@@ -11,7 +11,7 @@
 <h3 align="center"> Sumário</h3>
   <p align="center">
  <span>|
-    <a href="https://future-eats5.surge.sh/">:mag: Surge</a>
+    <a href="http://futureeats5.surge.sh/">:mag: Surge</a>
     <span>|
     <a href="#funcionalidades">:bulb: Funcionalidades</a>
     <span>|
@@ -30,7 +30,7 @@
 
 <hr/>
 
-<a href="https://future-eats5.surge.sh/">Future Eats</a>
+<a href="http://futureeats5.surge.sh/">Future Eats</a>
 
 <h3> Funcionalidades</h3>
 
@@ -48,7 +48,6 @@
 - [X] Editar endereço 
 - [X] Vizualizar Historico de pedido
 
-<<<<<<< HEAD
 <hr/>
 
 <h3>Como rodar localmente</h3>
@@ -86,4 +85,22 @@ Siga o passo-a-passo abaixo:
 
 <hr/>
 
-<img width="100" height="400" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/cadastro.png">
+<div align="center">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/login.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/cadastro.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/home.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/restaurante.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/carrinho%20e%20finalizacao%20de%20compra.png">
+<img width="350" height="900" src="https://github.com/future4code/Ailton-labe-food5/blob/master/prints/perfil%20e%20historico.png">
+</div>
+
+<h3>Desenvolvedores</h3>
+
+<hr/>
+
+<p>Gabriel Theodoro</p>
+<p>João Zang</p>
+<p>Rodrigo Póvoa</p>
+<p>Daniel Andrade</p>
+<p>Joclelson Rodrigues</p>
+<p>Maria Caroline Pereira</p>
