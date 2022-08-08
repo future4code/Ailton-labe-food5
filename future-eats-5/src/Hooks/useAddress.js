@@ -66,7 +66,6 @@ export const useAddress = () => {
   };
 
   const getFullAddress = async(url, token, setLoading, body) => {
-    console.log(url,token,setLoading,body)
     try {
       const response = await axios.get(url, {headers: {auth: token}})
       setAddress(response.data.address)

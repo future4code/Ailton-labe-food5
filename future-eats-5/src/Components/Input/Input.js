@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Label } from "./InputStyle";
 export const Input = ({ type, name, value, onChange, label, color,required }) => {
-  console.log(required)
   return (
     <Container color={color}>
       <input
