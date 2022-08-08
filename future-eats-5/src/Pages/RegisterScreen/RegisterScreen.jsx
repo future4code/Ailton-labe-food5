@@ -22,12 +22,21 @@ import { useForm } from "../../Hooks/useForm";
 import { BaseUrl } from "../../Constants/BaseUrl";
 import { useEffect, useState } from "react";
 import EyeHidden from "../../Assets/hidden-eye.png";
+import { toast } from "react-toastify";
 
 export const RegisterScreen = () => {
   const navigate = useNavigate();
   const [confirmPassword, setConfirmPassword] = useState("");
+  const errorNotification = (message) => {
+    toast.error(message, {
+      position: "bottom-center",
+      autoClose: 4000,
+      hideProgressBar: true,
+      draggable: true,
+    });
+  };
   const [error, setError] = useState(false);
-  const [canShowErrors, setCanShowErrors] = useState(false)
+  const [canShowErrors, setCanShowErrors] = useState(false);
   const { form, onChange, cleanFields } = useForm({
     name: "",
     email: "",
@@ -46,13 +55,17 @@ export const RegisterScreen = () => {
   const register = async (event) => {
     event.preventDefault();
     if (confirmPassword === form.password) {
-      try {
-        setError(false);
-        const response = await axios.post(`${BaseUrl}signup`, form);
-        GoTo(navigate, "/address");
-        localStorage.setItem("token", response.data.token);
-      } catch (error) {
-        console.log(error.reponse.data.message)
+      if (form.cpf.length < 11 || form.cpf.length > 11) {
+        errorNotification("CPF Inválido");
+      } else {
+        try {
+          setError(false);
+          const response = await axios.post(`${BaseUrl}signup`, form);
+          GoTo(navigate, "/address");
+          localStorage.setItem("token", response.data.token);
+        } catch (error) {
+          console.log(error);
+        }
       }
     } else {
       setError(true);
@@ -62,11 +75,16 @@ export const RegisterScreen = () => {
     setConfirmPassword(e.target.value);
   };
 
-  useEffect(()=>{
-    if (form.name.length > 0 && form.cpf.length > 0 && form.email.length > 0 && form.password.length > 0) {
-      setCanShowErrors(true)
+  useEffect(() => {
+    if (
+      form.name.length > 0 &&
+      form.cpf.length > 0 &&
+      form.email.length > 0 &&
+      form.password.length > 0
+    ) {
+      setCanShowErrors(true);
     }
-  },[form])
+  }, [form]);
 
   return (
     <Container>
@@ -118,7 +136,7 @@ export const RegisterScreen = () => {
             color={"#d0d0d0"}
           />
         )}
-        {form.cpf.length < 11 && canShowErrors ? (
+        {form.cpf.length < 11 || form.cpf.length > 11 && canShowErrors ? (
           <Input
             label={"CPF*"}
             name="cpf"
@@ -177,7 +195,8 @@ export const RegisterScreen = () => {
             </PasswordContainer>
           </>
         )}
-        {confirmPassword !== form.password || confirmPassword.length < 6 && canShowErrors ? (
+        {confirmPassword !== form.password ||
+        (confirmPassword.length < 6 && canShowErrors) ? (
           <PasswordContainer>
             <Input
               required
@@ -188,9 +207,9 @@ export const RegisterScreen = () => {
               color={"#e02020"}
             />
             <EyeImage src={EyeHidden} onClick={toggleConfirmPassword} />
-            {canShowErrors && confirmPassword !== form.password &&
-            <ErrorMessage>Deve ser a mesma que a anterior</ErrorMessage>
-            }
+            {canShowErrors && confirmPassword !== form.password && (
+              <ErrorMessage>Deve ser a mesma que a anterior</ErrorMessage>
+            )}
           </PasswordContainer>
         ) : (
           <PasswordContainer>
@@ -202,12 +221,12 @@ export const RegisterScreen = () => {
               type={confirmPasswordShown ? "text" : "password"}
               color={"#d0d0d0"}
             />
-            <EyeImage src={EyeHidden} onClick={toggleConfirmPassword} />            
+            <EyeImage src={EyeHidden} onClick={toggleConfirmPassword} />
           </PasswordContainer>
         )}
-        {canShowErrors && confirmPassword !== form.password &&
-            <ErrorSeparator/>
-            }
+        {canShowErrors && confirmPassword !== form.password && (
+          <ErrorSeparator />
+        )}
 
         <Button>Criar</Button>
       </Form>

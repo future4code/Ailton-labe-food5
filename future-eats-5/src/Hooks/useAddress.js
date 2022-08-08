@@ -44,7 +44,6 @@ export const useAddress = () => {
       const response = await axios.put( url, body, {headers: {auth: token}} )
       localStorage.setItem("addressToken", response.data.token)
     } catch (error) {
-      errorNotification(error.response.data.message)
     }
   }
 
@@ -67,12 +66,12 @@ export const useAddress = () => {
   };
 
   const getFullAddress = async(url, token, setLoading, body) => {
+    console.log(url,token,setLoading,body)
     try {
       const response = await axios.get(url, {headers: {auth: token}})
       setAddress(response.data.address)
       defineAddress(`${BaseUrl}address`, body, token)
     } catch (error) {
-      errorNotification(error.response.data.message)
       setLoading(false)
     }
   }
